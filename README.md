@@ -1,74 +1,112 @@
-# React + TypeScript + Vite
+# Fiction Development
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **"Making Imagination Reality."**
 
-Currently, two official plugins are available:
+Fiction Development is a cutting-edge web experience that combines minimalist aesthetics with high-performance engineering. Designed with a "weightless" philosophy, this project showcases a modern approach to software development agencies, featuring immersive animations, a dynamic particle system, and a seamless dark/light mode experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![React](https://img.shields.io/badge/react-19.x-61dafb.svg)
+![TypeScript](https://img.shields.io/badge/typescript-5.x-blue.svg)
+![Vite](https://img.shields.io/badge/vite-7.x-yellow.svg)
+![Tailwind](https://img.shields.io/badge/tailwind-4.x-38b2ac.svg)
 
-## React Compiler
+## ✨ Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **🌓 Dynamic Dark/Light Mode**: A deeply integrated theme system that adjusts not just colors, but background particle physics and blending modes.
+- **🌌 Immersive Particle System**: Custom HTML5 Canvas-based background with interactive particles that react to theme changes (Screen blend for dark, Multiply for light).
+- **🖱️ Parallax Interactions**: Mouse-aware parallax effects in the Hero section using `framer-motion-springs`.
+- **🤸 Interactive 3D Service Cards**: "Flip" functionality on service cards to reveal technical specs and real-world case studies on the back face.
+- **📜 Scroll-Linked Animations**: Process timeline and section reveals triggered by scroll position using Framer Motion.
+- **💅 Glassmorphism Design**: Extensive use of backdrop extraction and varying opacity layers for a premium, modern feel.
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Built with a focus on **Developer Experience (DX)** and **Performance**:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Core**: React 19, TypeScript
+- **Build Tool**: Vite 7
+- **Styling**: Tailwind CSS 4 (Beta), PostCSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Quality Assurance**: ESLint, Prettier (Enforced 2-space indentation)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Follow these steps to set up the project locally.
+
+### Prerequisites
+
+- Node.js (Version `20.19.0+` or `22.12.0+` recommended for Vite 7)
+- npm or yarn
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/JimmyDLA/fiction-dev.git
+    cd fiction-dev
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3.  **Start the development server**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+
+### Building for Production
+
+To create a production-ready build:
+
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The output will be in the `dist/` directory.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📂 Project Structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+src/
+├── components/
+│   ├── Layout/          # Navbar, Footer, ParticleBackground
+│   └── Sections/        # Hero, Services, Process, About, Contact
+├── lib/
+│   ├── theme.tsx        # ThemeProvider context & hooks
+│   └── utils.ts         # Helper functions
+├── index.css            # Global styles & Tailwind directives
+├── App.tsx              # Main application entry
+└── main.tsx             # React DOM root
 ```
-# fiction-dev
+
+## 🎨 Design Philosophy
+
+### The "Weightless" Aesthetic
+We moved away from heavy containers and solid backgrounds. Instead, content "floats" on the screen.
+- **Typography**: Uses **Inter** with tight tracking for headlines to create a solid visual anchor.
+- **Motion**: Everything has an entry animation. Nothing simply "appears"; it fades, slides, or scales into existence.
+- **Depth**: Shadows are colored (not just black) to create a sense of glowing depth, especially in dark mode.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+*Built with ❤️ by Fiction Development Team.*
