@@ -1,4 +1,4 @@
-import { Github, Twitter, Linkedin } from 'lucide-react';
+// import { Github, Twitter, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -17,7 +17,8 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="flex space-x-6">
+          {/* Social Icons Removed for now */}
+          {/* <div className="flex space-x-6">
             <a
               href="#"
               className="text-slate-400 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white transition-colors"
@@ -39,7 +40,7 @@ const Footer = () => {
               <span className="sr-only">LinkedIn</span>
               <Linkedin size={24} />
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

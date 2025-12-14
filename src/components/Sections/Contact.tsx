@@ -1,7 +1,54 @@
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      setErrorMessage('Please fill in all fields.');
+      setStatus('error');
+      return;
+    }
+
+    setStatus('sending');
+    setErrorMessage('');
+
+    try {
+      const SERVICE_ID = import.meta.env.VITE_EJS_SERVICE_ID;
+      const TEMPLATE_ID = import.meta.env.VITE_EJS_TEMPLATE_ID;
+      const PUBLIC_KEY = import.meta.env.VITE_EJS_PUBLIC_KEY;
+      console.log('formRef.current:', formRef.current!);
+      const response = await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current!, PUBLIC_KEY);
+      console.log('EmailJS Response:', response);
+      if (response.status === 200) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+        setErrorMessage('Failed to send message. Please try again later.');
+      }
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setStatus('error');
+      setErrorMessage('Failed to send message. Please try again later.');
+    }
+  };
+
   return (
     <section id="contact" className="py-20 md:py-32 relative z-10">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,7 +73,7 @@ const Contact = () => {
           transition={{ delay: 0.1 }}
           className="bg-white dark:bg-zinc-900/50 rounded-3xl p-8 md:p-12 shadow-2xl shadow-blue-900/5 dark:shadow-none border border-slate-100 dark:border-white/5 backdrop-blur-sm"
         >
-          <form className="space-y-6">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
@@ -38,6 +85,9 @@ const Contact = () => {
                 <input
                   type="text"
                   id="name"
+                  name="name" // Matches default EmailJS template variable
+                  value={formData.name}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-gray-600"
                   placeholder="John Doe"
                 />
@@ -52,6 +102,9 @@ const Contact = () => {
                 <input
                   type="email"
                   id="email"
+                  name="email" // Matches default EmailJS template variable
+                  value={formData.email}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-gray-600"
                   placeholder="john@example.com"
                 />
@@ -67,18 +120,44 @@ const Contact = () => {
               </label>
               <textarea
                 id="message"
+                name="message" // EmailJS standard name
                 rows={4}
+                value={formData.message}
+                onChange={handleChange}
                 className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
                 placeholder="Tell us about your project..."
               ></textarea>
             </div>
 
+            {status === 'error' && (
+              <div className="flex items-center gap-2 text-red-500 text-sm">
+                <AlertCircle size={16} />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+
+            {status === 'success' && (
+              <div className="flex items-center gap-2 text-green-500 text-sm">
+                <CheckCircle size={16} />
+                <span>Message sent successfully! We'll get back to you soon.</span>
+              </div>
+            )}
+
             <div className="flex justify-end">
               <button
-                type="button"
-                className="px-8 py-4 rounded-full bg-[#1a73e8] text-white font-medium text-lg hover:bg-black dark:hover:bg-slate-200 transition-colors flex items-center gap-2"
+                type="submit"
+                disabled={status === 'sending'}
+                className="px-8 py-4 rounded-full bg-[#1a73e8] text-white font-medium text-lg hover:bg-black dark:hover:bg-slate-200 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message <ArrowRight size={20} />
+                {status === 'sending' ? (
+                  <>
+                    Sending... <Loader2 size={20} className="animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Send Message <ArrowRight size={20} />
+                  </>
+                )}
               </button>
             </div>
           </form>
