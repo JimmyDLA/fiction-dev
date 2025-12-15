@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { Monitor, Smartphone, Server, Database, Cloud, Lock, X, Lightbulb } from 'lucide-react';
+import { Monitor, Smartphone, Server, Database, Cloud, Lock, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Service {
   title: string;
@@ -12,6 +13,7 @@ interface Service {
 
 const ServiceCard = ({ service, index }: { service: Service; index: number }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="relative h-96 perspective-1000" onClick={() => setIsFlipped(!isFlipped)}>
@@ -39,7 +41,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
               {service.description}
             </p>
             <div className="mt-auto text-sm font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1">
-              Click to learn more <span className="text-lg">→</span>
+              {t('services.click_more')} <span className="text-lg">→</span>
             </div>
           </motion.div>
         </div>
@@ -51,14 +53,14 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
             <div className="absolute top-0 right-0 p-32 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
             <div className="absolute bottom-0 left-0 p-32 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
-            <div className="relative z-10 flex flex-col h-full pt-4">
+            <div className="relative z-10 flex flex-col h-full">
               {/* Example Section (Top) */}
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="p-1.5 rounded-lg bg-blue-500/30 border border-blue-400/30">
                     <Lightbulb size={14} className="text-blue-100" />
                   </div>
-                  <h3 className="text-lg font-bold text-white">Example</h3>
+                  <h3 className="text-lg font-bold text-white">{t('services.example_label')}</h3>
                 </div>
                 <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-sm hover:bg-white/15 transition-colors">
                   <p className="text-white text-sm font-medium leading-relaxed">
@@ -69,17 +71,11 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
 
               {/* More Info Section (Bottom) */}
               <div className="mt-auto mb-12">
-                <h3 className="text-lg font-bold mb-2 text-white/90">More Info</h3>
+                <h3 className="text-lg font-bold mb-2 text-white/90">{t('services.more_info')}</h3>
                 <p className="text-blue-50/90 dark:text-blue-100/90 text-sm leading-relaxed">
                   {service.details}
                 </p>
               </div>
-            </div>
-
-            <div className="mt-auto flex justify-center">
-              <button className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
-                <X size={20} />
-              </button>
             </div>
           </div>
         </div>
@@ -89,60 +85,50 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
 };
 
 const Services = () => {
+    const { t } = useTranslation();
+
   const services = [
     {
-      title: 'Web Development',
-      description: 'High-performance websites built with modern frameworks.',
+      title: t('services.items.web_development.title'),
+      description: t('services.items.web_development.description'),
       icon: Monitor,
-      details:
-        'We build fast, beautiful websites that work perfectly on phones, tablets, and computers. From simple informational sites to complex online stores.',
-      example:
-        'Personal Portfolios, Restaurant Websites with Booking, Online Clothing Stores, Real Estate Listings.',
+      details: t('services.items.web_development.details'),
+      example: t('services.items.web_development.example'),
     },
     {
-      title: 'Mobile Apps',
-      description: 'Native and cross-platform applications for iOS and Android.',
+      title: t('services.items.mobile_apps.title'),
+      description: t('services.items.mobile_apps.description'),
       icon: Smartphone,
-      details:
-        'Custom apps for iPhone and Android that your customers can download. We handle everything from design to publishing on the App Store.',
-      example:
-        'Fitness Tracking Apps, Food Delivery Platforms, Social Networking Apps, Employee Scheduling Tools.',
+      details: t('services.items.mobile_apps.details'),
+      example: t('services.items.mobile_apps.example'),
     },
     {
-      title: 'Backend Solutions',
-      description: 'Scalable architectures and robust API design.',
+      title: t('services.items.backend_solutions.title'),
+      description: t('services.items.backend_solutions.description'),
       icon: Server,
-      details:
-        'The "engine" under the hood that powers your app. We ensure your data is processed quickly, correctly, and securely.',
-      example:
-        'User Login Systems, Payment Processing (Stripe/PayPal), Live Chat Features, Inventory Management Systems.',
+      details: t('services.items.backend_solutions.details'),
+      example: t('services.items.backend_solutions.example'),
     },
     {
-      title: 'Database Design',
-      description: 'Optimized data structures for growing needs.',
+      title: t('services.items.database_design.title'),
+      description: t('services.items.database_design.description'),
       icon: Database,
-      details:
-        'We organize your business data so it is safe, easy to find, and never gets lost. Think of it as a super-powered digital filing cabinet.',
-      example:
-        'Customer Contact Lists (CRM), Product Catalogs, Order Transaction Histories, Employee Records.',
+      details: t('services.items.database_design.details'),
+      example: t('services.items.database_design.example'),
     },
     {
-      title: 'Cloud Infrastructure',
-      description: 'Secure deployments on AWS, Google Cloud, or Azure.',
+      title: t('services.items.cloud_infrastructure.title'),
+      description: t('services.items.cloud_infrastructure.description'),
       icon: Cloud,
-      details:
-        "We host your software on reliable servers (like Amazon or Google) so it stays online 24/7 and doesn't crash when many people visit.",
-      example:
-        'Hosting for High-Traffic Blogs, Automatic Data Backups, Scalable Web Applications for Startups.',
+      details: t('services.items.cloud_infrastructure.details'),
+      example: t('services.items.cloud_infrastructure.example'),
     },
     {
-      title: 'Cybersecurity',
-      description: 'Implementing best practices for data security.',
+      title: t('services.items.cybersecurity.title'),
+      description: t('services.items.cybersecurity.description'),
       icon: Lock,
-      details:
-        "We lock the digital doors to keep hackers out. Protecting your business secrets and your customers' private information.",
-      example:
-        'Secure Login (Two-Factor Auth), Encryption for Credit Cards, Spam Protection, Data Leak Prevention.',
+      details: t('services.items.cybersecurity.details'),
+      example: t('services.items.cybersecurity.example'),
     },
   ];
 
@@ -156,7 +142,7 @@ const Services = () => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight"
           >
-            Capabilities.
+            {t('services.title')}
           </motion.h2>
           <div className="h-1 w-20 bg-blue-600 rounded-full"></div>
         </div>

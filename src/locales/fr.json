@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "development": "Développer",
+    "services": "Services",
+    "about": "À Propos",
+    "contact": "Contact"
+  },
+  "hero": {
+    "making": "Rendre",
+    "imagination": "L'Imagination",
+    "reality": "Réelle.",
+    "subtitle": "Nous créons des logiciels qui repoussent les limites et évoluent à l’infini.",
+    "start_project": "Démarrer",
+    "explore_solutions": "Explorer"
+  },
+  "about": {
+    "title_start": "Nous n'écrivons pas juste du code.",
+    "title_middle": "Nous ingénions",
+    "title_end": "des solutions numériques.",
+    "p1": "Fiction Development comble le fossé entre les exigences techniques complexes et les expériences utilisateur intuitives.",
+    "p2": "Des startups aux entreprises, nous construisons la réalité sous-jacente qui propulse votre présence numérique.",
+    "projects": "Projets",
+    "satisfaction": "Satisfaction",
+    "support": "Support"
+  },
+  "services": {
+    "title": "Capacités.",
+    "more_info": "Plus d'infos",
+    "example_label": "Exemple",
+    "click_more": "Cliquez pour en savoir plus",
+    "items": {
+      "web_development": {
+        "title": "Dév. Web",
+        "description": "Sites web performants construits avec des frameworks modernes.",
+        "details": "Nous construisons des sites rapides et beaux qui fonctionnent parfaitement sur tous les appareils.",
+        "example": "Portfolios, Sites de Restaurants, Boutiques en Ligne."
+      },
+      "mobile_apps": {
+        "title": "Apps Mobiles",
+        "description": "Applications natives et multiplateformes pour iOS et Android.",
+        "details": "Apps personnalisées pour iPhone et Android que vos clients peuvent télécharger.",
+        "example": "Apps de Fitness, Livraison de Repas, Réseaux Sociaux."
+      },
+      "backend_solutions": {
+        "title": "Solutions Backend",
+        "description": "Architectures évolutives et conception d'API robuste.",
+        "details": "Le 'moteur' qui propulse votre application. Données traitées rapidement et sûrement.",
+        "example": "Systèmes de Connexion, Paiements, Chat en Direct."
+      },
+      "database_design": {
+        "title": "Bases de Données",
+        "description": "Structures de données optimisées pour les besoins croissants.",
+        "details": "Organisation sécurisée de vos données professionnelles.",
+        "example": "CRM, Catalogues Produits, Historique de Commandes."
+      },
+      "cloud_infrastructure": {
+        "title": "Infrastructure Cloud",
+        "description": "Déploiements sécurisés sur AWS, Google Cloud ou Azure.",
+        "details": "Hébergement fiable 24/7 pour votre logiciel.",
+        "example": "Hébergement Blog, Sauvegardes Auto, Apps Scalables."
+      },
+      "cybersecurity": {
+        "title": "Cybersécurité",
+        "description": "Meilleures pratiques pour la sécurité des données.",
+        "details": "Nous protégeons vos secrets d'affaires et les données privées.",
+        "example": "Connexion Sécurisée, Chiffrement, Protection Spam."
+      }
+    }
+  },
+  "process": {
+    "title": "Notre Processus",
+    "subtitle": "Du concept au lancement, nous suivons un pipeline complet assurant la qualité.",
+    "design": {
+      "title": "Design",
+      "subtitle": "Création Visuelle",
+      "description": "Tout grand produit commence par une vision. Nous façonnons l'émotion et l'utilisabilité.",
+      "stat1": "Designs Livrés",
+      "stat2": "Composants Réutilisables",
+      "stat3": "Itérations Créatives"
+    },
+    "development": {
+      "title": "Développer",
+      "subtitle": "L'Architecture Rencontre l'Art",
+      "description": "Nous traduisons le potentiel en performance. React et Node.js pour des apps rapides.",
+      "stat1": "Qualité du Code",
+      "stat2": "Couverture de Test",
+      "stat3": "Performance"
+    },
+    "test": {
+      "title": "Test",
+      "subtitle": "La Perfection est la Norme",
+      "description": "Nous le prouvons. Tests automatisés rigoureux pour un produit à toute épreuve.",
+      "stat1": "Couverture de Test",
+      "stat2": "Bugs Éliminés",
+      "stat3": "Fiabilité"
+    },
+    "launch": {
+      "title": "Lancement",
+      "subtitle": "Quand Nous Lançons, Nous Volons",
+      "description": "La mise en ligne est une déclaration. Avec des tests rigoureux et une surveillance 24/7.",
+      "stat1": "Disponibilité",
+      "stat2": "Grade de Sécurité",
+      "stat3": "Support Client"
+    }
+  },
+  "contact": {
+    "title": "Prêt pour le futur ?",
+    "subtitle": "Discutons de comment nous pouvons élever votre entreprise.",
+    "name": "Nom",
+    "email": "Email",
+    "message": "Message",
+    "placeholder_name": "Jean Dupont",
+    "placeholder_email": "jean@exemple.com",
+    "placeholder_message": "Parlez-nous de votre projet...",
+    "btn_send": "Envoyer",
+    "btn_sending": "Envoi...",
+    "error_fill": "Veuillez remplir tous les champs.",
+    "error_send": "Échec de l'envoi. Veuillez réessayer.",
+    "success": "Message envoyé avec succès ! Nous vous répondrons bientôt."
+  }
+}

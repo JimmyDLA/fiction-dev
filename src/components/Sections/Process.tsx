@@ -1,71 +1,73 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { PenTool, Rocket, Code, ClipboardCheck } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
-const steps = [
-  {
-    id: 1,
-    title: 'Design',
-    subtitle: 'Crafting Visual Brilliance',
-    description:
-      "Every great product begins with vision. We don't just design; we shape emotion, intent, and usability into captivating visuals that leave lasting impressions. Your brand's soul starts breathing here.",
-    tags: ['UI/UX Design', 'Prototyping', 'Design System'],
-    stats: [
-      { label: 'Designs Delivered', value: '700+' },
-      { label: 'Reusable Components', value: '100+' },
-      { label: 'Creative Iterations', value: '∞' },
-    ],
-    icon: PenTool,
-    color: 'from-purple-500 to-pink-500',
-  },
-  {
-    id: 2,
-    title: 'Development',
-    subtitle: 'Architecture Meets Artistry',
-    description:
-      'We translate potential into performance. Using cutting-edge frameworks like React and Node.js, we build scalable, lightning-fast applications that stand the test of time.',
-    tags: ['React', 'Node.js', 'Typescript', 'Tailwind'],
-    stats: [
-      { label: 'Code Quality', value: 'A+' },
-      { label: 'Test Coverage', value: '95%' },
-      { label: 'Performance', value: '100%' },
-    ],
-    icon: Code,
-    color: 'from-blue-500 to-indigo-600',
-  },
-  {
-    id: 3,
-    title: 'Test',
-    subtitle: 'Perfection is the Standard',
-    description:
-      "We don't just hope it works; we prove it. Through rigorous automated testing, user acceptance trials, and stress testing, we ensure your product is bulletproof before it ever meets the world.",
-    tags: ['E2E Testing', 'Cypress', 'Jest', 'QA'],
-    stats: [
-      { label: 'Test Coverage', value: '100%' },
-      { label: 'Bugs Swatted', value: 'Zero' },
-      { label: 'Reliability', value: '99.99%' },
-    ],
-    icon: ClipboardCheck,
-    color: 'from-orange-400 to-red-500',
-  },
-  {
-    id: 4,
-    title: 'Launch',
-    subtitle: 'When We Launch, We Soar',
-    description:
-      "Going live isn't just a date—it's a declaration. With rigorous testing, airtight security, and around-the-clock monitoring, we launch your vision with confidence, clarity, and celebration.",
-    tags: ['Monitoring', 'Analytics', 'Support'],
-    stats: [
-      { label: 'Uptime', value: '99.99%' },
-      { label: 'Security Grade', value: 'A+' },
-      { label: 'Client Support', value: '24/7' },
-    ],
-    icon: Rocket,
-    color: 'from-blue-500 to-indigo-500',
-  },
-];
+// This needs to be inside the component to use the hook, or we pass t to it
+// For simplicity, we'll define a hook that returns the steps
+const useProcessSteps = () => {
+    const { t } = useTranslation();
+    return [
+    {
+        id: 1,
+        title: t('process.design.title'),
+        subtitle: t('process.design.subtitle'),
+        description: t('process.design.description'),
+        tags: ['UI/UX Design', 'Prototyping', 'Design System'],
+        stats: [
+        { label: t('process.design.stat1'), value: '700+' },
+        { label: t('process.design.stat2'), value: '100+' },
+        { label: t('process.design.stat3'), value: '∞' },
+        ],
+        icon: PenTool,
+        color: 'from-purple-500 to-pink-500',
+    },
+    {
+        id: 2,
+        title: t('process.development.title'),
+        subtitle: t('process.development.subtitle'),
+        description: t('process.development.description'),
+        tags: ['React', 'Node.js', 'Typescript', 'Tailwind'],
+        stats: [
+        { label: t('process.development.stat1'), value: 'A+' },
+        { label: t('process.development.stat2'), value: '95%' },
+        { label: t('process.development.stat3'), value: '100%' },
+        ],
+        icon: Code,
+        color: 'from-blue-500 to-indigo-600',
+    },
+    {
+        id: 3,
+        title: t('process.test.title'),
+        subtitle: t('process.test.subtitle'),
+        description: t('process.test.description'),
+        tags: ['E2E Testing', 'Cypress', 'Jest', 'QA'],
+        stats: [
+        { label: t('process.test.stat1'), value: '100%' },
+        { label: t('process.test.stat2'), value: 'Zero' },
+        { label: t('process.test.stat3'), value: '99.99%' },
+        ],
+        icon: ClipboardCheck,
+        color: 'from-orange-400 to-red-500',
+    },
+    {
+        id: 4,
+        title: t('process.launch.title'),
+        subtitle: t('process.launch.subtitle'),
+        description: t('process.launch.description'),
+        tags: ['Monitoring', 'Analytics', 'Support'],
+        stats: [
+        { label: t('process.launch.stat1'), value: '99.99%' },
+        { label: t('process.launch.stat2'), value: 'A+' },
+        { label: t('process.launch.stat3'), value: '24/7' },
+        ],
+        icon: Rocket,
+        color: 'from-blue-500 to-indigo-500',
+    },
+    ];
+}
 
-const ProcessStep = ({ step }: { step: (typeof steps)[0]; index: number }) => {
+const ProcessStep = ({ step }: { step: any; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -113,7 +115,7 @@ const ProcessStep = ({ step }: { step: (typeof steps)[0]; index: number }) => {
           </p>
 
           <div className="flex flex-wrap gap-2 md:gap-3 mb-8 md:mb-10">
-            {step.tags.map((tag) => (
+            {step.tags.map((tag: string) => (
               <span
                 key={tag}
                 className="px-3 py-1 md:px-4 md:py-2 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-gray-300 text-xs md:text-sm font-medium border border-slate-200 dark:border-white/5"
@@ -124,7 +126,7 @@ const ProcessStep = ({ step }: { step: (typeof steps)[0]; index: number }) => {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8 border-t border-slate-100 dark:border-white/5">
-            {step.stats.map((stat, i) => (
+            {step.stats.map((stat: any, i: number) => (
               <div key={i} className="bg-slate-50 dark:bg-black/20 p-3 md:p-4 rounded-xl">
                 <div className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-1">
                   {stat.value}
@@ -142,6 +144,9 @@ const ProcessStep = ({ step }: { step: (typeof steps)[0]; index: number }) => {
 };
 
 const Process = () => {
+  const steps = useProcessSteps();
+  const { t } = useTranslation();
+
   return (
     <section id="development" className="py-20 md:py-32 relative z-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -152,11 +157,10 @@ const Process = () => {
           className="text-center mb-16 md:mb-24"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 md:mb-6 tracking-tight">
-            Our Development Process
+            {t('process.title')}
           </h2>
           <p className="text-lg md:text-xl text-slate-600 dark:text-gray-400 max-w-2xl mx-auto">
-            From concept to launch, we follow a comprehensive development pipeline ensuring quality
-            and excellence at every step.
+             {t('process.subtitle')}
           </p>
         </motion.div>
 

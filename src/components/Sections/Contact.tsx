@@ -2,8 +2,14 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import { useTranslation } from 'react-i18next';
+
+const SERVICE_ID = import.meta.env.VITE_EJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EJS_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_EJS_PUBLIC_KEY;
 
 const Contact = () => {
+  const { t } = useTranslation();
   const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -20,7 +26,7 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
-      setErrorMessage('Please fill in all fields.');
+      setErrorMessage(t('contact.error_fill'));
       setStatus('error');
       return;
     }
@@ -29,23 +35,19 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      const SERVICE_ID = import.meta.env.VITE_EJS_SERVICE_ID;
-      const TEMPLATE_ID = import.meta.env.VITE_EJS_TEMPLATE_ID;
-      const PUBLIC_KEY = import.meta.env.VITE_EJS_PUBLIC_KEY;
-      console.log('formRef.current:', formRef.current!);
       const response = await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current!, PUBLIC_KEY);
-      console.log('EmailJS Response:', response);
+
       if (response.status === 200) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
       } else {
         setStatus('error');
-        setErrorMessage('Failed to send message. Please try again later.');
+        setErrorMessage(t('contact.error_send'));
       }
     } catch (error) {
       console.error('EmailJS Error:', error);
       setStatus('error');
-      setErrorMessage('Failed to send message. Please try again later.');
+      setErrorMessage(t('contact.error_send'));
     }
   };
 
@@ -59,10 +61,10 @@ const Contact = () => {
           className="text-center mb-10 md:mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 md:mb-6 tracking-tight">
-            Ready for the future?
+            {t('contact.title')}
           </h2>
           <p className="text-xl text-slate-600 dark:text-gray-400">
-            Let's discuss how we can elevate your business.
+            {t('contact.subtitle')}
           </p>
         </motion.div>
 
@@ -80,7 +82,7 @@ const Contact = () => {
                   htmlFor="name"
                   className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2"
                 >
-                  Name
+                  {t('contact.name')}
                 </label>
                 <input
                   type="text"
@@ -89,7 +91,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-gray-600"
-                  placeholder="John Doe"
+                  placeholder={t('contact.placeholder_name')}
                 />
               </div>
               <div>
@@ -97,7 +99,7 @@ const Contact = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2"
                 >
-                  Email
+                   {t('contact.email')}
                 </label>
                 <input
                   type="email"
@@ -106,7 +108,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-gray-600"
-                  placeholder="john@example.com"
+                  placeholder={t('contact.placeholder_email')}
                 />
               </div>
             </div>
@@ -116,7 +118,7 @@ const Contact = () => {
                 htmlFor="message"
                 className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2"
               >
-                Message
+                 {t('contact.message')}
               </label>
               <textarea
                 id="message"
@@ -125,7 +127,7 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
-                placeholder="Tell us about your project..."
+                placeholder={t('contact.placeholder_message')}
               ></textarea>
             </div>
 
@@ -139,7 +141,7 @@ const Contact = () => {
             {status === 'success' && (
               <div className="flex items-center gap-2 text-green-500 text-sm">
                 <CheckCircle size={16} />
-                <span>Message sent successfully! We'll get back to you soon.</span>
+                <span>{t('contact.success')}</span>
               </div>
             )}
 
@@ -151,11 +153,11 @@ const Contact = () => {
               >
                 {status === 'sending' ? (
                   <>
-                    Sending... <Loader2 size={20} className="animate-spin" />
+                    {t('contact.btn_sending')} <Loader2 size={20} className="animate-spin" />
                   </>
                 ) : (
                   <>
-                    Send Message <ArrowRight size={20} />
+                     {t('contact.btn_send')} <ArrowRight size={20} />
                   </>
                 )}
               </button>

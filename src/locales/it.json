@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "development": "Sviluppo",
+    "services": "Servizi",
+    "about": "Chi Siamo",
+    "contact": "Contatti"
+  },
+  "hero": {
+    "making": "Rendere",
+    "imagination": "L'Immaginazione",
+    "reality": "Realtà.",
+    "subtitle": "Sviluppiamo software che supera i limiti e scala all’infinito.",
+    "start_project": "Inizia Progetto",
+    "explore_solutions": "Esplora Soluzioni"
+  },
+  "about": {
+    "title_start": "Non scriviamo solo codice.",
+    "title_middle": "Progettiamo",
+    "title_end": "soluzioni digitali.",
+    "p1": "Fiction Development colma il divario tra requisiti tecnici complessi ed esperienze utente intuitive.",
+    "p2": "Dalle startup alle grandi imprese, costruiamo la realtà sottostante che alimenta la tua presenza digitale.",
+    "projects": "Progetti",
+    "satisfaction": "Soddisfazione",
+    "support": "Supporto"
+  },
+  "services": {
+    "title": "Capacità.",
+    "more_info": "Più Info",
+    "example_label": "Esempio",
+    "click_more": "Clicca per saperne di più",
+    "items": {
+      "web_development": {
+        "title": "Sviluppo Web",
+        "description": "Siti web ad alte prestazioni costruiti con framework moderni.",
+        "details": "Costruiamo siti veloci e belli che funzionano perfettamente su telefoni, tablet e computer.",
+        "example": "Portfolio Personali, Siti Ristoranti, E-commerce."
+      },
+      "mobile_apps": {
+        "title": "App Mobili",
+        "description": "Applicazioni native e multipiattaforma per iOS e Android.",
+        "details": "App personalizzate per iPhone e Android che i tuoi clienti possono scaricare.",
+        "example": "App Fitness, Delivery, Social Network."
+      },
+      "backend_solutions": {
+        "title": "Soluzioni Backend",
+        "description": "Architetture scalabili e design API robusto.",
+        "details": "Il 'motore' sotto il cofano. Assicuriamo che i tuoi dati siano elaborati velocemente e in sicurezza.",
+        "example": "Sistemi di Login, Pagamenti, Live Chat."
+      },
+      "database_design": {
+        "title": "Design Database",
+        "description": "Strutture dati ottimizzate per esigenze crescenti.",
+        "details": "Organizziamo i dati del tuo business in modo sicuro e facile da trovare.",
+        "example": "CRM, Cataloghi Prodotti, Storico Ordini."
+      },
+      "cloud_infrastructure": {
+        "title": "Infrastruttura Cloud",
+        "description": "Deployment sicuri su AWS, Google Cloud o Azure.",
+        "details": "Ospitiamo il tuo software su server affidabili per essere online 24/7.",
+        "example": "Hosting Blog, Backup Automatici, App Scalabili."
+      },
+      "cybersecurity": {
+        "title": "Cybersecurity",
+        "description": "Implementazione delle migliori pratiche di sicurezza.",
+        "details": "Chiudiamo le porte digitali per tenere fuori gli hacker.",
+        "example": "Login Sicuro, Crittografia, Protezione Spam."
+      }
+    }
+  },
+  "process": {
+    "title": "Il Nostro Processo",
+    "subtitle": "Dal concetto al lancio, seguiamo una pipeline completa garantendo qualità.",
+    "design": {
+      "title": "Design",
+      "subtitle": "Creare Brillantezza Visiva",
+      "description": "Ogni grande prodotto inizia con una visione. Diamo forma all'emozione.",
+      "stat1": "Design Consegnati",
+      "stat2": "Componenti Riutilizzabili",
+      "stat3": "Iterazioni Creative"
+    },
+    "development": {
+      "title": "Sviluppare",
+      "subtitle": "Architettura e Arte",
+      "description": "Traduciamo il potenziale in performance. React e Node.js per app veloci.",
+      "stat1": "Qualità Codice",
+      "stat2": "Copertura Test",
+      "stat3": "Performance"
+    },
+    "test": {
+      "title": "Test",
+      "subtitle": "La Perfezione è lo Standard",
+      "description": "Non speriamo solo che funzioni; lo proviamo. Test automatizzati rigorosi.",
+      "stat1": "Copertura Test",
+      "stat2": "Bug Eliminati",
+      "stat3": "Affidabilità"
+    },
+    "launch": {
+      "title": "Lancio",
+      "subtitle": "Quando Lanciamo, Voliamo",
+      "description": "Andare online è una dichiarazione. Con test rigidi e monitoraggio 24/7.",
+      "stat1": "Uptime",
+      "stat2": "Grado Sicurezza",
+      "stat3": "Supporto Clienti"
+    }
+  },
+  "contact": {
+    "title": "Pronto per il futuro?",
+    "subtitle": "Parliamo di come possiamo elevare il tuo business.",
+    "name": "Nome",
+    "email": "Email",
+    "message": "Messaggio",
+    "placeholder_name": "Mario Rossi",
+    "placeholder_email": "mario@esempio.com",
+    "placeholder_message": "Raccontaci del tuo progetto...",
+    "btn_send": "Invia Messaggio",
+    "btn_sending": "Invio...",
+    "error_fill": "Compila tutti i campi.",
+    "error_send": "Invio fallito. Riprova più tardi.",
+    "success": "Messaggio inviato! Ti risponderemo presto."
+  }
+}

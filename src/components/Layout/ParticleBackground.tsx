@@ -105,7 +105,7 @@ const ParticleBackground = () => {
     <canvas
       ref={canvasRef}
       className={`fixed top-0 left-0 w-full h-full pointer-events-none z-0 transition-opacity duration-1000 ${
-        isDark ? 'mix-blend-screen opacity-40' : 'mix-blend-multiply opacity-60'
+        isDark ? 'mix-blend-screen opacity-100' : 'mix-blend-multiply opacity-100'
       }`}
     />
   );

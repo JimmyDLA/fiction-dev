@@ -1,8 +1,11 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -48,29 +51,31 @@ const Hero = () => {
             style={{ x: titleX, y: titleY }}
             className="text-6xl md:text-8xl font-bold tracking-tight text-slate-900 dark:text-white mb-8"
           >
-            Making <br />
-            <span className="text-blue-600 dark:text-blue-500">Imagination</span> Reality.
+            {t('hero.making')} <br />
+            <span className="text-blue-600 dark:text-blue-500">{t('hero.imagination')}</span> {t('hero.reality')}
           </motion.h1>
 
           <p className="mt-6 text-xl md:text-2xl text-slate-600 dark:text-gray-300 max-w-2xl mx-auto mb-12 font-medium">
-            We build software that breaks limits and scales effortlessly.
+            {t('hero.subtitle')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <motion.button
-              whileHover={{ scale: 1.05, translateY: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 rounded-full bg-[#1a73e8] text-white font-medium text-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all flex items-center gap-2"
-            >
-              Start Project <ArrowRight size={20} />
-            </motion.button>
+            <Link to="/start-project">
+              <motion.button
+                whileHover={{ scale: 1.05, translateY: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-8 py-4 rounded-full bg-[#1a73e8] text-white font-medium text-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all flex items-center gap-2"
+              >
+                {t('hero.start_project')} <ArrowRight size={20} />
+              </motion.button>
+            </Link>
             <a href="#services">
               <motion.button
                 whileHover={{ scale: 1.05, translateY: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="px-8 py-4 rounded-full bg-white dark:bg-white/10 text-slate-700 dark:text-white font-medium text-lg border border-slate-200 dark:border-white/10 hover:border-blue-200 hover:bg-blue-50/50 dark:hover:bg-white/20 transition-all"
               >
-                Explore Solutions
+                {t('hero.explore_solutions')}
               </motion.button>
             </a>
           </div>

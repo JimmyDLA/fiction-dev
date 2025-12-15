@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "development": "Desarrollo",
+    "services": "Servicios",
+    "about": "Nosotros",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "making": "Haciendo la",
+    "imagination": "Imaginación",
+    "reality": "Realidad.",
+    "subtitle": "Construimos software que rompe límites y escala infinitamente.",
+    "start_project": "Iniciar Proyecto",
+    "explore_solutions": "Explorar Soluciones"
+  },
+  "about": {
+    "title_start": "No solo escribimos código.",
+    "title_middle": "Ingeniamos",
+    "title_end": "soluciones digitales.",
+    "p1": "Fiction Development une requisitos técnicos complejos con experiencias de usuario intuitivas.",
+    "p2": "Desde startups hasta empresas grandes, construimos la realidad subyacente que impulsa tu presencia digital.",
+    "projects": "Proyectos",
+    "satisfaction": "Satisfacción",
+    "support": "Soporte"
+  },
+  "services": {
+    "title": "Capacidades.",
+    "more_info": "Más Info",
+    "example_label": "Ejemplo",
+    "click_more": "Clic para ver más",
+    "items": {
+      "web_development": {
+        "title": "Desarrollo Web",
+        "description": "Sitios web de alto rendimiento construidos con frameworks modernos.",
+        "details": "Construimos sitios rápidos y hermosos que funcionan perfectamente en teléfonos, tabletas y computadoras.",
+        "example": "Portafolios Personales, Sitios de Restaurantes, Tiendas en Línea."
+      },
+      "mobile_apps": {
+        "title": "Apps Móviles",
+        "description": "Aplicaciones nativas y multiplataforma para iOS y Android.",
+        "details": "Apps personalizadas para iPhone y Android que tus clientes pueden descargar.",
+        "example": "Apps de Fitness, Plataformas de Delivery, Redes Sociales."
+      },
+      "backend_solutions": {
+        "title": "Soluciones Backend",
+        "description": "Arquitecturas escalables y diseño de API robusto.",
+        "details": "El 'motor' bajo el capó que impulsa tu app. Aseguramos que tus datos se procesen rápido y seguro.",
+        "example": "Sistemas de Login, Procesamiento de Pagos, Chat en Vivo."
+      },
+      "database_design": {
+        "title": "Diseño de Bases de Datos",
+        "description": "Estructuras de datos optimizadas para necesidades crecientes.",
+        "details": "Organizamos los datos de tu negocio para que estén seguros y fáciles de encontrar.",
+        "example": "CRM, Catálogos de Productos, Historial de Pedidos."
+      },
+      "cloud_infrastructure": {
+        "title": "Infraestructura Cloud",
+        "description": "Despliegues seguros en AWS, Google Cloud o Azure.",
+        "details": "Alojamos tu software en servidores confiables para que esté en línea 24/7.",
+        "example": "Hosting para Blogs, Backups Automáticos, Apps Escalables."
+      },
+      "cybersecurity": {
+        "title": "Ciberseguridad",
+        "description": "Implementando mejores prácticas para seguridad de datos.",
+        "details": "Cerramos las puertas digitales para mantener fuera a los hackers.",
+        "example": "Login Seguro, Encriptación, Protección contra Spam."
+      }
+    }
+  },
+  "process": {
+    "title": "Vuestro Proceso",
+    "subtitle": "Desde el concepto hasta el lanzamiento, seguimos un pipeline integral asegurando calidad.",
+    "design": {
+      "title": "Diseño",
+      "subtitle": "Creando Brillo Visual",
+      "description": "Todo gran producto comienza con una visión. Damos forma a la emoción y usabilidad.",
+      "stat1": "Diseños Entregados",
+      "stat2": "Componentes Reusables",
+      "stat3": "Iteraciones Creativas"
+    },
+    "development": {
+      "title": "Desarrollar",
+      "subtitle": "Arquitectura y Arte",
+      "description": "Traducimos potencial en rendimiento. Usando React y Node.js para apps escalables.",
+      "stat1": "Calidad de Código",
+      "stat2": "Cobertura de Tests",
+      "stat3": "Rendimiento"
+    },
+    "test": {
+      "title": "Pruebas",
+      "subtitle": "La Perfección es el Estándar",
+      "description": "No solo esperamos que funcione; lo probamos rigurosamente.",
+      "stat1": "Cobertura de Tests",
+      "stat2": "Bugs Eliminados",
+      "stat3": "Confiabilidad"
+    },
+    "launch": {
+      "title": "Lanzamiento",
+      "subtitle": "Cuando Lanzamos, Volamos",
+      "description": "Salir en vivo es una declaración. Con pruebas rigurosas y monitoreo 24/7.",
+      "stat1": "Tiempo en línea",
+      "stat2": "Grado de Seguridad",
+      "stat3": "Soporte al Cliente"
+    }
+  },
+  "contact": {
+    "title": "¿Listo para el futuro?",
+    "subtitle": "Hablemos de cómo podemos elevar tu negocio.",
+    "name": "Nombre",
+    "email": "Email",
+    "message": "Mensaje",
+    "placeholder_name": "Juan Pérez",
+    "placeholder_email": "juan@ejemplo.com",
+    "placeholder_message": "Cuéntanos sobre tu proyecto...",
+    "btn_send": "Enviar Mensaje",
+    "btn_sending": "Enviando...",
+    "error_fill": "Por favor completa todos los campos.",
+    "error_send": "Error al enviar mensaje. Intenta más tarde.",
+    "success": "¡Mensaje enviado con éxito! Te contactaremos pronto."
+  }
+}
