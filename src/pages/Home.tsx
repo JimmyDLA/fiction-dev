@@ -3,6 +3,7 @@ import Services from '../components/Sections/Services';
 import Process from '../components/Sections/Process';
 import About from '../components/Sections/About';
 import Contact from '../components/Sections/Contact';
+import Quote from '../components/Sections/Quote';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -28,6 +29,7 @@ const Home = () => {
       <About />
       <Process />
       <Services />
+      <Quote />
       <Contact />
     </>
   );

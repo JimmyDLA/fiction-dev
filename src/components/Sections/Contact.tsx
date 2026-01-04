@@ -1,11 +1,11 @@
 import { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Loader2, CheckCircle, AlertCircle, Check } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { useTranslation } from 'react-i18next';
 
 const SERVICE_ID = import.meta.env.VITE_EJS_SERVICE_ID;
-const TEMPLATE_ID = import.meta.env.VITE_EJS_TEMPLATE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EJS_CONTACT_TEMPLATE;
 const PUBLIC_KEY = import.meta.env.VITE_EJS_PUBLIC_KEY;
 
 const Contact = () => {
@@ -18,6 +18,7 @@ const Contact = () => {
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -40,6 +41,7 @@ const Contact = () => {
       if (response.status === 200) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
+        setShowSuccessModal(true);
       } else {
         setStatus('error');
         setErrorMessage(t('contact.error_send'));
@@ -165,6 +167,44 @@ const Contact = () => {
           </form>
         </motion.div>
       </div>
+      
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              className="bg-white dark:bg-zinc-900 rounded-3xl p-8 md:p-12 text-center max-w-md w-full shadow-2xl relative overflow-hidden"
+            >
+              <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: 0.2, type: "spring" }}
+                >
+                  <Check size={40} className="text-green-600 dark:text-green-400" />
+                </motion.div>
+              </div>
+
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+                {t('contact.success_modal.title')}
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 mb-8">
+                {t('contact.success_modal.message')}
+              </p>
+
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="w-full py-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold hover:opacity-90 transition-opacity"
+              >
+                {t('contact.success_modal.button')}
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

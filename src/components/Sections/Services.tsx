@@ -62,7 +62,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
                   </div>
                   <h3 className="text-lg font-bold text-white">{t('services.example_label')}</h3>
                 </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-sm hover:bg-white/15 transition-colors">
+                <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-sm hover:bg-white/15 transition-colors">
                   <p className="text-white text-sm font-medium leading-relaxed">
                     {service.example}
                   </p>

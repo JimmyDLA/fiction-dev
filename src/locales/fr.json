@@ -103,6 +103,95 @@
       "stat3": "Support Client"
     }
   },
+  "quote": {
+    "title": "Besoin d'une estimation ?",
+    "subtitle": "Obtenez une estimation pour votre projet en quelques secondes grâce à notre assistant interactif.",
+    "cta": "Obtenir un Devis"
+  },
+  "wizard": {
+    "steps": {
+      "service": "Que voulez-vous construire ?",
+      "details": "Détails du Projet",
+      "app_details": "Détails de l'App",
+      "web_details": "Détails Web",
+      "contact": "Presque fini ! Où envoyer le devis ?",
+      "summary": "Prêt à soumettre ?",
+      "success_subtitle": "Nous examinerons vos besoins et vous répondrons sous 24 heures."
+    },
+    "services": {
+      "web": "Application Web",
+      "web_desc": "Sites web, SaaS, Portfolios",
+      "mobile": "App Mobile",
+      "mobile_desc": "iOS, Android, Cross-platform",
+      "backend": "API Backend",
+      "backend_desc": "Logique serveur, Bases de données",
+      "other": "Autre / Conseil",
+      "other_desc": "Cloud, Sécurité, Sur mesure"
+    },
+    "labels": {
+      "target_platform": "Plateforme Cible",
+      "website_type": "Type de Site Web",
+      "project_focus": "Objectif du Projet",
+      "features": "Fonctionnalités Clés",
+      "timeline": "Délais",
+      "budget": "Budget Estimé",
+      "details": "Autre chose ?",
+      "name": "Nom",
+      "email": "Email"
+    },
+    "placeholders": {
+      "details": "Décrivez brièvement votre idée ou vos besoins spécifiques...",
+      "name": "Votre Nom",
+      "email": "votre@email.com"
+    },
+    "options": {
+      "timeline": {
+        "default": "Sélectionner durée",
+        "asap": "URGENT (Rush)",
+        "months_1_2": "1-2 Mois",
+        "months_3_6": "3-6 Mois",
+        "months_6_plus": "6+ Mois"
+      },
+      "budget": {
+        "default": "Sélectionner gamme",
+        "k1_5": "$1k - $5k",
+        "k5_10": "$5k - $10k",
+        "k10_25": "$10k - $25k",
+        "k25_plus": "$25k+"
+      }
+    },
+    "buttons": {
+      "back": "Retour",
+      "next": "Suivant",
+      "review": "Revoir",
+      "submit": "Envoyer Demande",
+      "edit": "Éditer"
+    },
+    "validation": {
+      "name_required": "Le nom est requis",
+      "email_required": "L'email est requis",
+      "email_invalid": "Veuillez entrer un email valide"
+    },
+    "review": {
+      "service_type": "Type de Service",
+      "platforms": "Plateformes",
+      "features": "Fonctionnalités",
+      "timeline": "Délais",
+      "budget": "Budget",
+      "contact": "Contact"
+    },
+    "success_modal": {
+      "title": "Demande Envoyée !",
+      "message": "Merci d'avoir commencé votre projet avec nous. Nous vous contacterons bientôt.",
+      "button": "Retour à l'Accueil"
+    },
+    "nav": {
+      "service": "Service",
+      "details": "Détails",
+      "contact": "Contact",
+      "review": "Revue"
+    }
+  },
   "contact": {
     "title": "Prêt pour le futur ?",
     "subtitle": "Discutons de comment nous pouvons élever votre entreprise.",
@@ -116,6 +205,11 @@
     "btn_sending": "Envoi...",
     "error_fill": "Veuillez remplir tous les champs.",
     "error_send": "Échec de l'envoi. Veuillez réessayer.",
-    "success": "Message envoyé avec succès ! Nous vous répondrons bientôt."
+    "success": "Message envoyé avec succès !",
+    "success_modal": {
+      "title": "Message Envoyé !",
+      "message": "Merci de nous avoir contactés. Nous vous répondrons sous 24h.",
+      "button": "Fermer"
+    }
   }
 }

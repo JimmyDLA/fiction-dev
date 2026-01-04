@@ -103,6 +103,95 @@
       "stat3": "Client Support"
     }
   },
+  "quote": {
+    "title": "Need an estimate?",
+    "subtitle": "Get a ballpark figure for your project in seconds with our interactive wizard.",
+    "cta": "Get a Quote Today"
+  },
+  "wizard": {
+    "steps": {
+      "service": "What do you want to build?",
+      "details": "Project Details",
+      "app_details": "App Details",
+      "web_details": "Web Details",
+      "contact": "Almost done! Where should we send the quote?",
+      "summary": "Ready to Submit?",
+      "success_subtitle": "We'll review your requirements and get back to you within 24 hours."
+    },
+    "services": {
+      "web": "Web Application",
+      "web_desc": "Websites, SaaS, Portfolios",
+      "mobile": "Mobile App",
+      "mobile_desc": "iOS, Android, Cross-platform",
+      "backend": "Backend API",
+      "backend_desc": "Server logic, Database design",
+      "other": "Other / Consulting",
+      "other_desc": "Cloud, Security, Custom"
+    },
+    "labels": {
+      "target_platform": "Target Platform",
+      "website_type": "Website Type",
+      "project_focus": "Project Focus",
+      "features": "Key Features Needed",
+      "timeline": "Timeline",
+      "budget": "Budget Estimate",
+      "details": "Anything else?",
+      "name": "Name",
+      "email": "Email"
+    },
+    "placeholders": {
+      "details": "Briefly describe your idea or specific requirements...",
+      "name": "Your Name",
+      "email": "your@email.com"
+    },
+    "options": {
+      "timeline": {
+        "default": "Select duration",
+        "asap": "ASAP (Rush)",
+        "months_1_2": "1-2 Months",
+        "months_3_6": "3-6 Months",
+        "months_6_plus": "6+ Months"
+      },
+      "budget": {
+        "default": "Select range",
+        "k1_5": "$1k - $5k",
+        "k5_10": "$5k - $10k",
+        "k10_25": "$10k - $25k",
+        "k25_plus": "$25k+"
+      }
+    },
+    "buttons": {
+      "back": "Back",
+      "next": "Next",
+      "review": "Review",
+      "submit": "Submit Request",
+      "edit": "Edit"
+    },
+    "validation": {
+      "name_required": "Name is required",
+      "email_required": "Email is required",
+      "email_invalid": "Please enter a valid email address"
+    },
+    "review": {
+      "service_type": "Service Type",
+      "platforms": "Platforms",
+      "features": "Features",
+      "timeline": "Timeline",
+      "budget": "Budget",
+      "contact": "Contact"
+    },
+    "success_modal": {
+      "title": "Request Sent!",
+      "message": "Thanks for starting your project with us. We'll be in touch shortly.",
+      "button": "Return Home"
+    },
+    "nav": {
+      "service": "Service",
+      "details": "Details",
+      "contact": "Contact",
+      "review": "Review"
+    }
+  },
   "contact": {
     "title": "Ready for the future?",
     "subtitle": "Let's discuss how we can elevate your business.",
@@ -116,6 +205,11 @@
     "btn_sending": "Sending...",
     "error_fill": "Please fill in all fields.",
     "error_send": "Failed to send message. Please try again later.",
-    "success": "Message sent successfully! We'll get back to you soon."
+    "success": "Message sent successfully! We'll get back to you soon.",
+    "success_modal": {
+      "title": "Message Sent!",
+      "message": "Thanks for reaching out. We'll get back to you within 24 hours.",
+      "button": "Close"
+    }
   }
 }
