@@ -190,6 +190,16 @@
       "details": "Dettagli",
       "contact": "Contatto",
       "review": "Riepilogo"
+    },
+    "live_quote": {
+      "title": "Preventivo Live",
+      "empty_state": "Seleziona opzioni per vedere i dettagli",
+      "base_service": "Servizio Base",
+      "platforms_type": "Piattaforme e Tipo",
+      "addons_promo": "Extra (Primi 3 Gratuiti)",
+      "included": "(Incluso)",
+      "estimated_range": "Range Stimato",
+      "disclaimer": "*Il preventivo finale può variare in base a requisiti specifici."
     }
   },
   "contact": {

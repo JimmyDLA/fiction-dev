@@ -14,12 +14,12 @@ export const PRICING_CONFIG: PricingStructure = {
   services: {
     web: {
       label: 'Web Development',
-      basePrice: 1500, // Starting at "$Spark" package level
+      basePrice: 1000, // Starting at "$Spark" package level
       description: 'Professional websites and web applications',
     },
     mobile: {
       label: 'Mobile App',
-      basePrice: 8000, // Starting at "$Orbit" package level
+      basePrice: 5000, // Starting at "$Orbit" package level
       description: 'Native iOS and Android applications',
     },
     backend: {

@@ -190,6 +190,16 @@
       "details": "Détails",
       "contact": "Contact",
       "review": "Revue"
+    },
+    "live_quote": {
+      "title": "Devis en Direct",
+      "empty_state": "Sélectionnez des options pour voir le détail",
+      "base_service": "Service de Base",
+      "platforms_type": "Plateformes et Type",
+      "addons_promo": "Extras (3 Premiers Gratuits)",
+      "included": "(Inclus)",
+      "estimated_range": "Fourchette Estimée",
+      "disclaimer": "*Le devis final peut varier selon les besoins spécifiques."
     }
   },
   "contact": {

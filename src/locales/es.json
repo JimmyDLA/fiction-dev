@@ -190,6 +190,16 @@
       "details": "Detalles",
       "contact": "Contacto",
       "review": "Revisión"
+    },
+    "live_quote": {
+      "title": "Presupuesto en Vivo",
+      "empty_state": "Selecciona opciones para ver el desglose",
+      "base_service": "Servicio Base",
+      "platforms_type": "Plataformas y Tipo",
+      "addons_promo": "Extras (Primeros 3 Gratis)",
+      "included": "(Incluido)",
+      "estimated_range": "Rango Estimado",
+      "disclaimer": "*El presupuesto final puede variar según requisitos específicos."
     }
   },
   "contact": {

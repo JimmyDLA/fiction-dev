@@ -190,6 +190,16 @@
       "details": "Details",
       "contact": "Contact",
       "review": "Review"
+    },
+    "live_quote": {
+      "title": "Live Quote",
+      "empty_state": "Select options to see breakdown",
+      "base_service": "Base Service",
+      "platforms_type": "Platforms & Type",
+      "addons_promo": "Add-ons (First 3 Free)",
+      "included": "(Included)",
+      "estimated_range": "Estimated Range",
+      "disclaimer": "*Final quote may vary based on specific requirements."
     }
   },
   "contact": {

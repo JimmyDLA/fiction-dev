@@ -3,7 +3,7 @@ import logoWhite from '../../assets/logo-dark.png';
 import { useTheme } from '../../lib/theme';
 import { Moon, Sun, Menu, X, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -24,15 +24,18 @@ const Navbar = () => {
   ];
 
   const handleNavClick = (id: string) => {
+    setIsOpen(false);
+    
     if (location.pathname === '/') {
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
       }
     } else {
       navigate('/', { state: { scrollTo: id } });
     }
-    setIsOpen(false);
   };
   
   // Handle scroll on mount if navigating from another page
@@ -53,6 +56,21 @@ const Navbar = () => {
     { code: 'it', label: 'IT' },
   ];
 
+  const navRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node) && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
   const handleHomeClick = () => {
     navigate('/');
     setIsOpen(false);
@@ -61,6 +79,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
+      ref={navRef}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -69,7 +88,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0 flex items-center gap-3 cursor-pointer" onClick={handleHomeClick}>
-            <img src={theme === 'dark' ? logoWhite : logo} alt="Fiction Dev" className="h-10 w-auto" />
+            <img src={theme === 'dark' ? logoWhite : logo} alt="Fiction Dev" className="h-6 w-auto" />
             <span
               className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight"
             >

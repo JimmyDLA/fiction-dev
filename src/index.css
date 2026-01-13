@@ -14,6 +14,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* Accounts for fixed navbar height */
+}
+
 body {
   margin: 0;
   min-width: 320px;

@@ -545,6 +545,7 @@ interface LiveCartProps {
 }
 
 const LiveCart = React.memo(({ serviceType, projectType, features }: LiveCartProps) => {
+  const { t } = useTranslation();
   const { min, max } = calculateEstimate(
     serviceType,
     projectType,
@@ -563,12 +564,12 @@ const LiveCart = React.memo(({ serviceType, projectType, features }: LiveCartPro
           <span className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600">
             <Calculator size={20} />
           </span>
-          Live Quote
+          {t('wizard.live_quote.title')}
       </h3>
 
       {!hasSelection ? (
         <div className="text-center py-10 text-slate-400 text-sm">
-          Select options to see breakdown
+          {t('wizard.live_quote.empty_state')}
         </div>
       ) : (
         <div className="space-y-6">
@@ -579,7 +580,7 @@ const LiveCart = React.memo(({ serviceType, projectType, features }: LiveCartPro
                 <span className="block font-medium text-slate-700 dark:text-gray-200">
                   {PRICING_CONFIG.services[serviceType].label}
                 </span>
-                <span className="text-xs text-slate-400">Base Service</span>
+                <span className="text-xs text-slate-400">{t('wizard.live_quote.base_service')}</span>
               </div>
               <span className="font-semibold text-slate-900 dark:text-white">
                 ${PRICING_CONFIG.services[serviceType].basePrice.toLocaleString()}
@@ -590,7 +591,7 @@ const LiveCart = React.memo(({ serviceType, projectType, features }: LiveCartPro
           {/* Platform / Project Types */}
           {projectType.length > 0 && (
             <div className="space-y-3 pb-4 border-b border-slate-100 dark:border-white/5">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Platforms & Type</span>
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{t('wizard.live_quote.platforms_type')}</span>
               {projectType.map((type: string) => {
                 const config = PRICING_CONFIG.projectTypes[type];
                 return config ? (
@@ -608,7 +609,7 @@ const LiveCart = React.memo(({ serviceType, projectType, features }: LiveCartPro
           {/* Features */}
           {features.length > 0 && (
             <div className="space-y-3 pb-4 border-b border-slate-100 dark:border-white/5">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Add-ons (First 3 Free)</span>
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{t('wizard.live_quote.addons_promo')}</span>
               {[...features]
                 .sort((a, b) => {
                   const priceA = PRICING_CONFIG.features[a]?.basePrice || 0;
@@ -622,7 +623,7 @@ const LiveCart = React.memo(({ serviceType, projectType, features }: LiveCartPro
                     <div key={feat} className="flex justify-between items-center text-sm">
                       <span className="text-slate-600 dark:text-gray-400">
                         {config.label}
-                        {isFree && <span className="text-green-600 dark:text-green-400 text-xs ml-2 font-medium">(Included)</span>}
+                        {isFree && <span className="text-green-600 dark:text-green-400 text-xs ml-2 font-medium">{t('wizard.live_quote.included')}</span>}
                       </span>
                       <div className="text-right">
                         {isFree ? (
@@ -645,7 +646,7 @@ const LiveCart = React.memo(({ serviceType, projectType, features }: LiveCartPro
           {/* Total */}
           <div className="pt-2">
             <div className="flex justify-between items-center mb-1">
-              <span className="text-slate-500 text-sm">Estimated Range</span>
+              <span className="text-slate-500 text-sm">{t('wizard.live_quote.estimated_range')}</span>
             </div>
             <div className="flex items-baseline justify-between">
                 <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
@@ -653,7 +654,7 @@ const LiveCart = React.memo(({ serviceType, projectType, features }: LiveCartPro
                 </span>
             </div>
             <p className="text-xs text-slate-400 mt-2 italic">
-              *Final quote may vary based on specific requirements.
+              {t('wizard.live_quote.disclaimer')}
             </p>
           </div>
         </div>
