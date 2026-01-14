@@ -22,16 +22,31 @@ const StartProject = () => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const [formData, setFormData] = useState<any>({
-    serviceType: '',
-    projectType: [],
-    features: [],
-    budget: '',
-    timeline: '',
-    name: '',
-    email: '',
-    details: '',
+  const [formData, setFormData] = useState<any>(() => {
+    const saved = localStorage.getItem('wizard_data');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to parse saved wizard data", e);
+      }
+    }
+    return {
+      serviceType: '',
+      projectType: [],
+      features: [],
+      budget: '',
+      timeline: '',
+      name: '',
+      email: '',
+      details: '',
+    };
   });
+
+  // Persist form data on change
+  useEffect(() => {
+    localStorage.setItem('wizard_data', JSON.stringify(formData));
+  }, [formData]);
 
   // Calculate direction for animation
   const direction = step > prevStep.current ? 1 : -1;
@@ -144,6 +159,7 @@ const StartProject = () => {
       if (response.status === 200) {
         setSubmitStatus('success');
         setShowSuccessModal(true);
+        localStorage.removeItem('wizard_data');
         // Redirect handled in Modal component or useEffect
       } else {
         setSubmitStatus('error');
