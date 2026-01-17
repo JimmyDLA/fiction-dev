@@ -16,7 +16,7 @@ const ParticleBackground = () => {
     let height = (canvas.height = window.innerHeight);
 
     const particles: Particle[] = [];
-    const particleCount = 150; // Moderate count for clean look
+    // particleCount is now dynamic in init()
 
     class Particle {
       x: number;
@@ -67,6 +67,7 @@ const ParticleBackground = () => {
 
     const init = () => {
       particles.length = 0;
+      const particleCount = window.innerWidth < 768 ? 50 : 150; // Reduce count for mobile
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
       }
