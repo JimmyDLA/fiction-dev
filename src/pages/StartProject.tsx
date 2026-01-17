@@ -11,6 +11,9 @@ const SERVICE_ID = import.meta.env.VITE_EJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EJS_WELCOME_TEMPLATE;
 const PUBLIC_KEY = import.meta.env.VITE_EJS_PUBLIC_KEY;
 
+// Track if the wizard has been visited in this session (module-level state)
+let hasSessionVisit = false;
+
 const StartProject = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,26 +25,43 @@ const StartProject = () => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  // Initialize state with "Reload-Only" persistence logic
   const [formData, setFormData] = useState<any>(() => {
-    const saved = localStorage.getItem('wizard_data');
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        console.error("Failed to parse saved wizard data", e);
-      }
+    // 1. If we've visited this component before in this session (client-nav back), CLEAR data.
+    if (hasSessionVisit) {
+      localStorage.removeItem('wizard_data');
+      return {
+        serviceType: '', projectType: [], features: [], budget: '', timeline: '', name: '', email: '', details: '',
+      };
     }
+
+    // 2. If it's a browser reload, RESTORE data.
+    const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
+    if (navEntry && navEntry.type === 'reload') {
+      const saved = localStorage.getItem('wizard_data');
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {
+          console.error("Failed to parse saved wizard data", e);
+        }
+      }
+    } 
+    
+    // 3. Otherwise (Fresh load or unknown), CLEAR data to be safe.
+    localStorage.removeItem('wizard_data');
     return {
-      serviceType: '',
-      projectType: [],
-      features: [],
-      budget: '',
-      timeline: '',
-      name: '',
-      email: '',
-      details: '',
+      serviceType: '', projectType: [], features: [], budget: '', timeline: '', name: '', email: '', details: '',
     };
   });
+
+  // Mark this session as "visited" after mount (delayed to handle Strict Mode double-mount)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      hasSessionVisit = true;
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Persist form data on change
   useEffect(() => {
@@ -424,7 +444,7 @@ const StartProject = () => {
             <button 
               onClick={handleWizardSubmit}
               disabled={isSubmitting}
-              className="px-10 py-4 rounded-full bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg shadow-blue-500/30 transition-all"
+              className="px-8 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 flex items-center gap-2"
             >
               {isSubmitting ? (
                 <>Sending... <Loader2 size={20} className="animate-spin" /></>
