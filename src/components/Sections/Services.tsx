@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Monitor, Smartphone, Server, Database, Cloud, Lock, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,14 +17,14 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
 
   return (
     <div className="relative h-96 perspective-1000" onClick={() => setIsFlipped(!isFlipped)}>
-      <motion.div
-        className="w-full h-full relative transform-style-3d transition-all duration-500 cursor-pointer"
+      <m.div
+        className="w-full h-full relative transform-style-3d cursor-pointer will-change-transform"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6, type: 'spring', stiffness: 260, damping: 20 }}
       >
         {/* Front Face */}
         <div className="absolute inset-0 backface-hidden">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
@@ -43,15 +43,14 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
             <div className="mt-auto text-sm font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1">
               {t('services.click_more')} <span className="text-lg">→</span>
             </div>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Back Face */}
         <div className="absolute inset-0 backface-hidden rotate-y-180 h-full w-full">
           <div className="h-full p-8 rounded-3xl bg-blue-600 dark:bg-blue-900/80 text-white border border-blue-500 dark:border-white/10 shadow-xl flex flex-col justify-center relative overflow-hidden">
             {/* Decorative background elements */}
-            <div className="absolute top-0 right-0 p-32 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <div className="absolute bottom-0 left-0 p-32 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+            {/* Decorative background elements - Removed for mobile performance */}
 
             <div className="relative z-10 flex flex-col h-full">
               {/* Example Section (Top) */}
@@ -79,7 +78,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
             </div>
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 };
@@ -136,14 +135,14 @@ const Services = () => {
     <section id="services" className="py-20 md:py-32 relative bg-white dark:bg-zinc-900 z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 md:mb-20">
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight"
           >
             {t('services.title')}
-          </motion.h2>
+          </m.h2>
           <div className="h-1 w-20 bg-blue-600 rounded-full"></div>
         </div>
 
