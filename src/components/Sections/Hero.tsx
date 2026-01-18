@@ -1,3 +1,4 @@
+import { ArrowDown } from "lucide-react";
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
@@ -80,6 +81,11 @@ const Hero = () => {
             </a>
           </div>
         </motion.div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <ArrowDown className="w-6 h-6 text-muted-foreground" />
       </div>
     </section>
   );
