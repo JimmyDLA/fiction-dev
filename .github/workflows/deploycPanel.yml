@@ -26,6 +26,11 @@ jobs:
 
       - name: 🏗️ Build Project
         run: npm run build
+        env:
+          VITE_EJS_PUBLIC_KEY: ${{ secrets.VITE_EJS_PUBLIC_KEY }}
+          VITE_EJS_WELCOME_TEMPLATE: ${{ secrets.VITE_EJS_WELCOME_TEMPLATE }}
+          VITE_EJS_CONTACT_TEMPLATE: ${{ secrets.VITE_EJS_CONTACT_TEMPLATE }}
+          VITE_EJS_SERVICE_ID: ${{ secrets.VITE_EJS_SERVICE_ID }}
 
       - name: 🚀 FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
