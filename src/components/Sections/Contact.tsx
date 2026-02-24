@@ -7,7 +7,11 @@ import { useTranslation } from 'react-i18next';
 const SERVICE_ID = import.meta.env.VITE_EJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EJS_CONTACT_TEMPLATE;
 const PUBLIC_KEY = import.meta.env.VITE_EJS_PUBLIC_KEY;
-
+console.log({
+  SERVICE_ID,
+  TEMPLATE_ID,
+  PUBLIC_KEY,
+});
 const Contact = () => {
   const { t } = useTranslation();
   const formRef = useRef<HTMLFormElement>(null);
@@ -36,7 +40,12 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      const response = await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current!, PUBLIC_KEY);
+      const response = await emailjs.sendForm(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        formRef.current!,
+        PUBLIC_KEY
+      );
 
       if (response.status === 200) {
         setStatus('success');
@@ -65,9 +74,7 @@ const Contact = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 md:mb-6 tracking-tight">
             {t('contact.title')}
           </h2>
-          <p className="text-xl text-slate-600 dark:text-gray-400">
-            {t('contact.subtitle')}
-          </p>
+          <p className="text-xl text-slate-600 dark:text-gray-400">{t('contact.subtitle')}</p>
         </motion.div>
 
         <motion.div
@@ -101,7 +108,7 @@ const Contact = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2"
                 >
-                   {t('contact.email')}
+                  {t('contact.email')}
                 </label>
                 <input
                   type="email"
@@ -120,7 +127,7 @@ const Contact = () => {
                 htmlFor="message"
                 className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-2"
               >
-                 {t('contact.message')}
+                {t('contact.message')}
               </label>
               <textarea
                 id="message"
@@ -159,7 +166,7 @@ const Contact = () => {
                   </>
                 ) : (
                   <>
-                     {t('contact.btn_send')} <ArrowRight size={20} />
+                    {t('contact.btn_send')} <ArrowRight size={20} />
                   </>
                 )}
               </button>
@@ -167,7 +174,7 @@ const Contact = () => {
           </form>
         </motion.div>
       </div>
-      
+
       {/* Success Modal */}
       <AnimatePresence>
         {showSuccessModal && (
@@ -182,7 +189,7 @@ const Contact = () => {
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.2, type: "spring" }}
+                  transition={{ delay: 0.2, type: 'spring' }}
                 >
                   <Check size={40} className="text-green-600 dark:text-green-400" />
                 </motion.div>
