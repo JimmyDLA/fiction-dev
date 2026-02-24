@@ -9,6 +9,7 @@ jobs:
   FTP-Deploy-Action:
     name: Build and Deploy
     runs-on: ubuntu-latest
+    environment: PROD
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
