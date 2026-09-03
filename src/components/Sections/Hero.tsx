@@ -56,7 +56,7 @@ const Hero = () => {
             {/* Headline with Mouse Parallax & Gradient Highlight */}
             <motion.h1
               style={{ x: titleX, y: titleY }}
-              className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1] mb-4 sm:mb-6"
+              className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.08] mb-6"
             >
               {t('hero.making')} <br />
               <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 dark:from-blue-400 dark:via-sky-400 dark:to-blue-300 bg-clip-text text-transparent">
@@ -66,27 +66,27 @@ const Hero = () => {
             </motion.h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-xl mb-6 sm:mb-10 leading-relaxed font-normal">
+            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-xl mb-8 sm:mb-10 leading-relaxed font-normal">
               {t('hero.subtitle')}
             </p>
 
-            {/* Dual Neumorphic Action Buttons */}
-            <div className="flex flex-wrap gap-3 sm:gap-4 items-center">
-              <Link to="/start-project">
-                <button className="nm-btn-accent px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-bold text-sm sm:text-base lg:text-lg flex items-center gap-2 group">
+            {/* Dual Neumorphic Action Buttons (Side-by-side on mobile & desktop) */}
+            <div className="flex flex-row items-center gap-3 sm:gap-6 max-w-lg">
+              <Link to="/start-project" className="flex-1 sm:flex-initial">
+                <button className="nm-btn-accent w-full px-4 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-xs sm:text-base lg:text-lg flex items-center justify-center gap-1.5 sm:gap-2 group whitespace-nowrap">
                   <span>{t('hero.start_project')}</span>
                   <ArrowRight
-                    size={18}
-                    className="transition-transform group-hover:translate-x-1"
+                    size={16}
+                    className="transition-transform group-hover:translate-x-1 shrink-0"
                   />
                 </button>
               </Link>
 
-              <a href="#services">
-                <button className="nm-btn px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-bold text-sm sm:text-base lg:text-lg flex items-center gap-2 text-slate-800 dark:text-slate-100">
+              <a href="#services" className="flex-1 sm:flex-initial">
+                <button className="nm-btn w-full px-4 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-xs sm:text-base lg:text-lg flex items-center justify-center gap-1.5 sm:gap-2 text-slate-800 dark:text-slate-100 whitespace-nowrap">
                   <Play
-                    size={14}
-                    className="text-blue-600 dark:text-blue-400 fill-blue-600 dark:fill-blue-400"
+                    size={13}
+                    className="text-blue-600 dark:text-blue-400 fill-blue-600 dark:fill-blue-400 shrink-0"
                   />
                   <span>{t('hero.explore_solutions')}</span>
                 </button>
@@ -95,7 +95,7 @@ const Hero = () => {
           </div>
 
           {/* Right Column: Tactile Neumorphic Web Component Skeleton Widget */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end w-full mt-8 lg:mt-0">
+          <div className="lg:col-span-5 flex justify-center lg:justify-end w-full sm:mt-20 lg:mt-0">
             <motion.div
               style={{ rotateX: widgetRotateX, rotateY: widgetRotateY }}
               className="perspective-1000 relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px]"
