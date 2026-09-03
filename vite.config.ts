@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
 export default defineConfig({
-  base: '/',
+  base: process.env.BASE_PATH || (process.env.NODE_ENV === 'production' ? '/fiction-dev/' : '/'),
   server: {
     host: '::',
     port: 8080,
