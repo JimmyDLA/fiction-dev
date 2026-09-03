@@ -26,7 +26,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 export function ThemeProvider({
   children,
   defaultTheme = 'light',
-  storageKey = 'vite-ui-theme',
+  storageKey = 'fiction-dev-theme',
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
@@ -35,25 +35,58 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
 
+    const resolvedTheme =
+      theme === 'system'
+        ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+        : theme;
+
     root.classList.remove('light', 'dark');
+    root.classList.add(resolvedTheme);
 
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
+    const isDark = resolvedTheme === 'dark';
+    const color = isDark ? '#131722' : '#eaf0f6';
 
-      root.classList.add(systemTheme);
-      return;
+    // Explicitly set CSS colorScheme & backgroundColor directly on root and body
+    root.style.colorScheme = isDark ? 'dark' : 'light';
+    document.body.style.colorScheme = isDark ? 'dark' : 'light';
+    root.style.backgroundColor = color;
+    document.body.style.backgroundColor = color;
+
+    // Force WebKit/Blink status bar refresh by removing and re-appending all meta tags
+    const existingMetas = document.querySelectorAll('meta[name="theme-color"]');
+    existingMetas.forEach((meta) => meta.remove());
+
+    const lightMeta = document.createElement('meta');
+    lightMeta.name = 'theme-color';
+    lightMeta.media = '(prefers-color-scheme: light)';
+    lightMeta.content = color;
+    document.head.appendChild(lightMeta);
+
+    const darkMeta = document.createElement('meta');
+    darkMeta.name = 'theme-color';
+    darkMeta.media = '(prefers-color-scheme: dark)';
+    darkMeta.content = color;
+    document.head.appendChild(darkMeta);
+
+    const defaultMeta = document.createElement('meta');
+    defaultMeta.name = 'theme-color';
+    defaultMeta.content = color;
+    document.head.appendChild(defaultMeta);
+
+    // Update iOS web app status bar style
+    const appleMeta = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+    if (appleMeta) {
+      appleMeta.setAttribute('content', isDark ? 'black-translucent' : 'default');
     }
-
-    root.classList.add(theme);
   }, [theme]);
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
+    setTheme: (newTheme: Theme) => {
+      localStorage.setItem(storageKey, newTheme);
+      setTheme(newTheme);
     },
     toggleTheme: () => {
       const newTheme = theme === 'dark' ? 'light' : 'dark';

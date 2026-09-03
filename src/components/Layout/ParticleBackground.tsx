@@ -1,6 +1,54 @@
 import { useEffect, useRef } from 'react';
 import { useTheme } from '../../lib/theme';
 
+class Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  color: string;
+  width: number;
+  height: number;
+
+  constructor(width: number, height: number, isDark: boolean) {
+    this.width = width;
+    this.height = height;
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.vx = (Math.random() - 0.5) * 2; // Original speed
+    this.vy = (Math.random() - 0.5) * 2;
+    this.size = Math.random() * 2 + 0.5; // Small, subtle dots
+
+    // Exact original colors: Red, Black/White, Blue
+    const lightColors = ['rgb(244, 66, 66)', 'rgb(0, 0, 0)', 'rgb(66, 133, 244)'];
+    const darkColors = ['rgb(244, 66, 66)', 'rgb(255, 255, 255)', 'rgb(100, 160, 255)'];
+
+    const colors = isDark ? darkColors : lightColors;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  update(width: number, height: number) {
+    this.width = width;
+    this.height = height;
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Wrap around screen
+    if (this.x < 0) this.x = width;
+    if (this.x > width) this.x = 0;
+    if (this.y < 0) this.y = height;
+    if (this.y > height) this.y = 0;
+  }
+
+  draw(ctx: CanvasRenderingContext2D) {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
@@ -15,74 +63,31 @@ const ParticleBackground = () => {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
+    const isDark =
+      theme === 'dark' ||
+      (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
     const particles: Particle[] = [];
-    // particleCount is now dynamic in init()
-
-    class Particle {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      color: string;
-
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 2; // Increased speed
-        this.vy = (Math.random() - 0.5) * 2;
-        this.size = Math.random() * 2 + 0.5; // Small, subtle dots
-
-        // Theme-aware colors
-        const isDark =
-          theme === 'dark' ||
-          (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
-        const lightColors = ['rgb(244, 66, 66)', 'rgb(0, 0, 0)', 'rgb(66, 133, 244)'];
-        const darkColors = ['rgb(244, 66, 66)', 'rgb(255, 255, 255)', 'rgb(100, 160, 255)'];
-
-        const colors = isDark ? darkColors : lightColors;
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        // Wrap around screen
-        if (this.x < 0) this.x = width;
-        if (this.x > width) this.x = 0;
-        if (this.y < 0) this.y = height;
-        if (this.y > height) this.y = 0;
-      }
-
-      draw() {
-        if (!ctx) return;
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
 
     const init = () => {
       particles.length = 0;
-      const particleCount = window.innerWidth < 768 ? 50 : 150; // Reduce count for mobile
+      const particleCount = window.innerWidth < 768 ? 50 : 150; // Original count
       for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
+        particles.push(new Particle(width, height, isDark));
       }
     };
 
+    let animationFrameId: number;
     const animate = () => {
       if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
 
       particles.forEach((p) => {
-        p.update();
-        p.draw();
+        p.update(width, height);
+        p.draw(ctx);
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     const handleResize = () => {
@@ -97,8 +102,9 @@ const ParticleBackground = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
     };
-  }, [theme]); // Re-run when theme changes
+  }, [theme]);
 
   const isDark = theme === 'dark';
 
@@ -113,3 +119,5 @@ const ParticleBackground = () => {
 };
 
 export default ParticleBackground;
+
+

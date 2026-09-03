@@ -2,40 +2,208 @@
 
 @variant dark (&:where(.dark, .dark *));
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+:root,
+html:not(.dark) {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Neumorphic Light Palette */
+  --nm-bg: #eaf0f6;
+  --nm-surface: #eaf0f6;
+  --nm-shadow-dark: #c2cfde;
+  --nm-shadow-light: #ffffff;
+  --nm-shadow-dark-deep: #b5c3d3;
+  --nm-shadow-subtle: #d3deea;
+  
+  --nm-text-main: #0f172a;
+  --nm-text-muted: #334155;
+  --nm-text-dim: #64748b;
+  
+  --nm-accent-primary: #1a73e8;
+  --nm-accent-secondary: #3b82f6;
+}
+
+.dark,
+html.dark {
+  color-scheme: dark;
+
+  /* Neumorphic Dark Palette */
+  --nm-bg: #131722;
+  --nm-surface: #131722;
+  --nm-shadow-dark: #080a0f;
+  --nm-shadow-light: #1d2334;
+  --nm-shadow-dark-deep: #05060a;
+  --nm-shadow-subtle: #171c2a;
+
+  --nm-text-main: #f8fafc;
+  --nm-text-muted: #cbd5e1;
+  --nm-text-dim: #94a3b8;
+
+  --nm-accent-primary: #3b82f6;
+  --nm-accent-secondary: #60a5fa;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px; /* Accounts for fixed navbar height */
+  scroll-padding-top: 100px;
+  background-color: var(--nm-bg);
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--nm-bg);
+  color: var(--nm-text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* -------------------------------------------------------------
+   Neumorphic Base Utility Classes
+------------------------------------------------------------- */
 @layer utilities {
+  /* 3D Flip Utilities */
   .perspective-1000 {
     perspective: 1000px;
+    -webkit-perspective: 1000px;
   }
   .transform-style-3d {
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
   }
   .backface-hidden {
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
   }
   .rotate-y-180 {
     transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+  }
+
+  /* Extruded Surfaces (Convex/Raised) */
+  .nm-flat {
+    background-color: var(--nm-surface);
+    box-shadow: 8px 8px 18px var(--nm-shadow-dark), -8px -8px 18px var(--nm-shadow-light);
+  }
+
+  .nm-flat-sm {
+    background-color: var(--nm-surface);
+    box-shadow: 4px 4px 10px var(--nm-shadow-dark), -4px -4px 10px var(--nm-shadow-light);
+  }
+
+  .nm-flat-lg {
+    background-color: var(--nm-surface);
+    box-shadow: 12px 12px 28px var(--nm-shadow-dark), -12px -12px 28px var(--nm-shadow-light);
+  }
+
+  .nm-flat-xl {
+    background-color: var(--nm-surface);
+    box-shadow: 16px 16px 36px var(--nm-shadow-dark-deep), -16px -16px 36px var(--nm-shadow-light);
+  }
+
+  /* Inset Surfaces (Concave/Sunken/Pressed) */
+  .nm-inset {
+    background-color: var(--nm-surface);
+    box-shadow: inset 4px 4px 8px var(--nm-shadow-dark), inset -4px -4px 8px var(--nm-shadow-light);
+  }
+
+  .nm-inset-sm {
+    background-color: var(--nm-surface);
+    box-shadow: inset 2px 2px 5px var(--nm-shadow-dark), inset -2px -2px 5px var(--nm-shadow-light);
+  }
+
+  .nm-inset-deep {
+    background-color: var(--nm-surface);
+    box-shadow: inset 8px 8px 18px var(--nm-shadow-dark-deep), inset -8px -8px 18px var(--nm-shadow-light);
+  }
+
+  .nm-inset-well {
+    background-color: var(--nm-surface);
+    box-shadow: inset 6px 6px 12px var(--nm-shadow-dark), inset -6px -6px 12px var(--nm-shadow-light);
+  }
+
+  /* Pills & Badges */
+  .nm-pill {
+    border-radius: 9999px;
+    background-color: var(--nm-surface);
+    box-shadow: 5px 5px 12px var(--nm-shadow-dark), -5px -5px 12px var(--nm-shadow-light);
+  }
+
+  .nm-pill-inset {
+    border-radius: 9999px;
+    background-color: var(--nm-surface);
+    box-shadow: inset 3px 3px 6px var(--nm-shadow-dark), inset -3px -3px 6px var(--nm-shadow-light);
+  }
+
+  /* Tactile Interactive Buttons */
+  .nm-btn {
+    background-color: var(--nm-surface);
+    color: var(--nm-text-main);
+    box-shadow: 5px 5px 12px var(--nm-shadow-dark), -5px -5px 12px var(--nm-shadow-light);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+  }
+
+  .nm-btn:hover {
+    box-shadow: 7px 7px 16px var(--nm-shadow-dark), -7px -7px 16px var(--nm-shadow-light);
+    transform: translateY(-1px);
+  }
+
+  .nm-btn:active {
+    box-shadow: inset 3px 3px 7px var(--nm-shadow-dark), inset -3px -3px 7px var(--nm-shadow-light);
+    transform: translateY(0);
+  }
+
+  /* Accent Button (Original Fiction Dev Electric Blue with Soft Glow & Inner Rim) */
+  .nm-btn-accent {
+    background: linear-gradient(135deg, #1a73e8 0%, #3b82f6 100%);
+    color: #ffffff;
+    box-shadow: 0 10px 22px -3px rgba(26, 115, 232, 0.45), 0 4px 6px -2px rgba(26, 115, 232, 0.25), inset 1px 1px 2px rgba(255, 255, 255, 0.35);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+  }
+
+  .nm-btn-accent:hover {
+    box-shadow: 0 14px 28px -3px rgba(26, 115, 232, 0.55), 0 6px 10px -2px rgba(26, 115, 232, 0.35), inset 1px 1px 2px rgba(255, 255, 255, 0.45);
+    transform: translateY(-1px);
+  }
+
+  .nm-btn-accent:active {
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.4), inset -1px -1px 3px rgba(255, 255, 255, 0.2);
+    transform: translateY(0);
+  }
+
+  /* Inset Form Inputs */
+  .nm-input {
+    background-color: var(--nm-surface);
+    color: var(--nm-text-main);
+    box-shadow: inset 3px 3px 7px var(--nm-shadow-dark), inset -3px -3px 7px var(--nm-shadow-light);
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .nm-input:focus {
+    border-color: rgba(26, 115, 232, 0.5);
+    box-shadow: inset 3px 3px 7px var(--nm-shadow-dark), inset -3px -3px 7px var(--nm-shadow-light), 0 0 0 3px rgba(26, 115, 232, 0.2);
+    outline: none;
+  }
+
+  /* Accessible Focus Ring */
+  .nm-focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  .nm-focus:focus-visible {
+    outline: 2px solid var(--nm-accent-primary);
+    outline-offset: 3px;
   }
 }

@@ -1,12 +1,23 @@
 import { m } from 'framer-motion';
-import { Monitor, Smartphone, Server, Database, Cloud, Lock, Lightbulb } from 'lucide-react';
+import {
+  Monitor,
+  Smartphone,
+  Server,
+  Database,
+  Cloud,
+  Lock,
+  Lightbulb,
+  Zap,
+  ChevronRight,
+  RotateCcw,
+} from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface Service {
   title: string;
   description: string;
-  icon: any;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
   details: string;
   example: string;
 }
@@ -16,75 +27,103 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
   const { t } = useTranslation();
 
   return (
-    <div className="relative h-96 perspective-1000" onClick={() => setIsFlipped(!isFlipped)}>
+    <m.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
+      className="relative h-[410px] w-full perspective-1000"
+    >
       <m.div
-        className="w-full h-full relative transform-style-3d cursor-pointer will-change-transform"
+        className="w-full h-full relative transform-style-3d cursor-pointer"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, type: 'spring', stiffness: 260, damping: 20 }}
+        transition={{ duration: 0.6, type: 'spring', stiffness: 200, damping: 22 }}
       >
-        {/* Front Face */}
-        <div className="absolute inset-0 backface-hidden">
-          <m.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
-            className="h-full group p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-white/10 shadow-lg shadow-slate-200/50 dark:shadow-none hover:border-blue-300 dark:hover:border-blue-500/50 transition-all duration-300 flex flex-col items-start justify-center"
-          >
-            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/40 dark:to-blue-800/20 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6 shadow-inner border border-white/50 dark:border-white/10 group-hover:scale-110 transition-transform duration-300">
+        {/* Front Face (Neumorphic Extruded Card) */}
+        <div
+          onClick={() => setIsFlipped(true)}
+          className="absolute inset-0 w-full h-full backface-hidden p-8 rounded-[28px] nm-flat hover:nm-flat-lg transition-shadow duration-300 flex flex-col items-start justify-between group"
+        >
+          <div className="w-full">
+            {/* Inset Icon Well */}
+            <div className="h-14 w-14 rounded-2xl nm-inset-sm text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
               <service.icon size={26} />
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+
+            {/* Service Title */}
+            <h3 className="text-2xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               {service.title}
             </h3>
-            <p className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium mb-6">
+
+            {/* Description */}
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-normal text-sm sm:text-base">
               {service.description}
             </p>
-            <div className="mt-auto text-sm font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1">
-              {t('services.click_more')} <span className="text-lg">→</span>
-            </div>
-          </m.div>
+          </div>
+
+          {/* Tactile Pill Button */}
+          <div className="nm-flat-sm group-hover:nm-flat px-4 py-2 rounded-full text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition-shadow">
+            <span>{t('services.click_more')}</span>
+            <ChevronRight
+              size={14}
+              className="text-blue-600 dark:text-blue-400 transition-transform group-hover:translate-x-0.5"
+            />
+          </div>
         </div>
 
-        {/* Back Face */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180 h-full w-full">
-          <div className="h-full p-8 rounded-3xl bg-blue-600 dark:bg-blue-900/80 text-white border border-blue-500 dark:border-white/10 shadow-xl flex flex-col justify-center relative overflow-hidden">
-            {/* Decorative background elements */}
-            {/* Decorative background elements - Removed for mobile performance */}
-
-            <div className="relative z-10 flex flex-col h-full">
-              {/* Example Section (Top) */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="p-1.5 rounded-lg bg-blue-500/30 border border-blue-400/30">
-                    <Lightbulb size={14} className="text-blue-100" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white">{t('services.example_label')}</h3>
+        {/* Back Face (Neumorphic Blueprint Details Panel) */}
+        <div
+          onClick={() => setIsFlipped(false)}
+          className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 p-8 rounded-[28px] bg-gradient-to-br from-[#deebf7] via-[#e5eef8] to-[#d8e6f5] dark:from-[#172033] dark:via-[#131b2c] dark:to-[#0f1523] border border-blue-300/30 dark:border-blue-500/20 shadow-xl flex flex-col justify-between relative overflow-hidden group"
+        >
+          <div className="w-full">
+            {/* Header with flip back indicator */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <div className="p-1.5 rounded-xl nm-inset-sm text-amber-500 bg-white/40 dark:bg-black/20">
+                  <Lightbulb size={16} />
                 </div>
-                <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-sm hover:bg-white/15 transition-colors">
-                  <p className="text-white text-sm font-medium leading-relaxed">
-                    {service.example}
-                  </p>
-                </div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300">
+                  {t('services.example_label')}
+                </h4>
               </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsFlipped(false);
+                }}
+                className="nm-flat-sm active:nm-inset-sm p-1.5 rounded-full text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                aria-label="Flip card back"
+              >
+                <RotateCcw size={14} />
+              </button>
+            </div>
 
-              {/* More Info Section (Bottom) */}
-              <div className="mt-auto mb-12">
-                <h3 className="text-lg font-bold mb-2 text-white/90">{t('services.more_info')}</h3>
-                <p className="text-blue-50/90 dark:text-blue-100/90 text-sm leading-relaxed">
-                  {service.details}
-                </p>
-              </div>
+            {/* Example Well */}
+            <div className="nm-inset-sm bg-white/50 dark:bg-black/30 rounded-2xl p-4 mb-4">
+              <p className="text-slate-800 dark:text-slate-200 text-xs sm:text-sm font-medium leading-relaxed">
+                {service.example}
+              </p>
+            </div>
+
+            {/* Details Section */}
+            <div className="space-y-1">
+              <h5 className="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-400">
+                {t('services.more_info')}
+              </h5>
+              <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
+                {service.details}
+              </p>
             </div>
           </div>
         </div>
       </m.div>
-    </div>
+    </m.div>
   );
 };
 
 const Services = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const services = [
     {
@@ -132,21 +171,25 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-20 md:py-32 relative bg-white dark:bg-zinc-900 z-10">
+    <section id="services" className="py-24 md:py-36 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 md:mb-20">
-          <m.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 tracking-tight"
-          >
-            {t('services.title')}
-          </m.h2>
-          <div className="h-1 w-20 bg-blue-600 rounded-full"></div>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6">
+          <div>
+            <div className="inline-flex items-center gap-2 nm-pill-inset px-4 py-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 mb-4">
+              <Zap size={14} />
+              <span>{t('services.title')}</span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Powerful Capabilities
+            </h2>
+          </div>
+
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-md">
+            Everything you need to succeed, built with precision, craftsmanship, and care.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8 md:gap-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <ServiceCard key={service.title} service={service} index={index} />
           ))}

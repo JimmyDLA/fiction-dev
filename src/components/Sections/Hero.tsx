@@ -1,8 +1,7 @@
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRight, Play } from 'lucide-react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
@@ -13,10 +12,10 @@ const Hero = () => {
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  // Mouse parallax for the main title
+  // Subtle Mouse parallax for the graphic
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -35,58 +34,127 @@ const Hero = () => {
   const titleX = useTransform(springX, [-0.5, 0.5], [-25, 25]);
   const titleY = useTransform(springY, [-0.5, 0.5], [-25, 25]);
 
+  const widgetRotateX = useTransform(springY, [-0.5, 0.5], [8, -8]);
+  const widgetRotateY = useTransform(springX, [-0.5, 0.5], [-8, 8]);
+
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center pt-20"
+      className="relative min-h-0 lg:min-h-[92vh] flex items-center justify-center pt-24 sm:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-24 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
           style={{ y, opacity }}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center"
         >
-          <motion.h1
-            style={{ x: titleX, y: titleY }}
-            className="text-6xl md:text-8xl font-bold tracking-tight text-slate-900 dark:text-white mb-8"
-          >
-            {t('hero.making')} <br />
-            <span className="text-blue-600 dark:text-blue-500">{t('hero.imagination')}</span> {t('hero.reality')}
-          </motion.h1>
+          {/* Left Text Column */}
+          <div className="lg:col-span-7 text-left">
+            {/* Headline with Mouse Parallax & Gradient Highlight */}
+            <motion.h1
+              style={{ x: titleX, y: titleY }}
+              className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1] mb-4 sm:mb-6"
+            >
+              {t('hero.making')} <br />
+              <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 dark:from-blue-400 dark:via-sky-400 dark:to-blue-300 bg-clip-text text-transparent">
+                {t('hero.imagination')}
+              </span>{' '}
+              {t('hero.reality')}
+            </motion.h1>
 
-          <p className="mt-6 text-xl md:text-2xl text-slate-600 dark:text-gray-300 max-w-2xl mx-auto mb-12 font-medium">
-            {t('hero.subtitle')}
-          </p>
+            {/* Subtitle */}
+            <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 max-w-xl mb-6 sm:mb-10 leading-relaxed font-normal">
+              {t('hero.subtitle')}
+            </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link to="/start-project">
-              <motion.button
-                whileHover={{ scale: 1.05, translateY: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 rounded-full bg-[#1a73e8] text-white font-medium text-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all flex items-center gap-2"
-              >
-                {t('hero.start_project')} <ArrowRight size={20} />
-              </motion.button>
-            </Link>
-            <a href="#services">
-              <motion.button
-                whileHover={{ scale: 1.05, translateY: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 rounded-full bg-white dark:bg-white/10 text-slate-700 dark:text-white font-medium text-lg border border-slate-200 dark:border-white/10 hover:border-blue-200 hover:bg-blue-50/50 dark:hover:bg-white/20 transition-all"
-              >
-                {t('hero.explore_solutions')}
-              </motion.button>
-            </a>
+            {/* Dual Neumorphic Action Buttons */}
+            <div className="flex flex-wrap gap-3 sm:gap-4 items-center">
+              <Link to="/start-project">
+                <button className="nm-btn-accent px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-bold text-sm sm:text-base lg:text-lg flex items-center gap-2 group">
+                  <span>{t('hero.start_project')}</span>
+                  <ArrowRight
+                    size={18}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
+                </button>
+              </Link>
+
+              <a href="#services">
+                <button className="nm-btn px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-bold text-sm sm:text-base lg:text-lg flex items-center gap-2 text-slate-800 dark:text-slate-100">
+                  <Play
+                    size={14}
+                    className="text-blue-600 dark:text-blue-400 fill-blue-600 dark:fill-blue-400"
+                  />
+                  <span>{t('hero.explore_solutions')}</span>
+                </button>
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Tactile Neumorphic Web Component Skeleton Widget */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end w-full mt-8 lg:mt-0">
+            <motion.div
+              style={{ rotateX: widgetRotateX, rotateY: widgetRotateY }}
+              className="perspective-1000 relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px]"
+            >
+              {/* Outer Recessed Base Plate */}
+              <div className="nm-inset-deep rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] p-4 sm:p-6 w-full aspect-[4/3] sm:aspect-square flex flex-col justify-between select-none transition-transform duration-300">
+                {/* Skeleton Top Navbar */}
+                <div className="flex items-center justify-between w-full pb-1">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 rounded-full bg-blue-600 dark:bg-blue-500 nm-flat-sm" />
+                    <div className="w-10 sm:w-14 lg:w-16 h-2 sm:h-2.5 lg:h-3 rounded-full nm-inset-sm" />
+                  </div>
+                  <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
+                    <div className="w-6 sm:w-8 lg:w-10 h-1.5 sm:h-2 lg:h-2.5 rounded-full nm-inset-sm" />
+                    <div className="w-5 sm:w-6 lg:w-8 h-1.5 sm:h-2 lg:h-2.5 rounded-full nm-inset-sm" />
+                    <div className="w-8 sm:w-10 lg:w-12 h-3.5 sm:h-4 lg:h-5 rounded-full nm-flat-sm bg-blue-50/40 dark:bg-blue-950/40" />
+                  </div>
+                </div>
+
+                {/* Skeleton Hero / Main Feature Card */}
+                <div className="nm-flat rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-5 flex flex-col gap-2 sm:gap-2.5 lg:gap-3">
+                  <div className="w-3/5 h-2.5 sm:h-3.5 lg:h-4 rounded-md nm-inset-sm bg-blue-500/15 dark:bg-blue-400/20" />
+                  <div className="space-y-1 sm:space-y-1.5">
+                    <div className="w-full h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
+                    <div className="w-4/5 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
+                  </div>
+                  <div className="flex items-center justify-between pt-0.5">
+                    <div className="w-14 sm:w-16 lg:w-20 h-5 sm:h-6 lg:h-7 rounded-lg bg-gradient-to-r from-blue-600 to-sky-500 shadow-sm shadow-blue-500/30" />
+                    <div className="w-6 sm:w-8 lg:w-10 h-2 sm:h-2.5 lg:h-3 rounded-md nm-inset-sm" />
+                  </div>
+                </div>
+
+                {/* Skeleton Bottom Grid (2 Sub-Cards) */}
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
+                  <div className="nm-flat rounded-lg sm:rounded-xl p-2.5 sm:p-3 lg:p-3.5 flex flex-col gap-1.5 sm:gap-2">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 rounded-md sm:rounded-lg nm-inset-sm" />
+                    <div className="w-3/4 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
+                    <div className="w-1/2 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
+                  </div>
+                  <div className="nm-flat rounded-lg sm:rounded-xl p-2.5 sm:p-3 lg:p-3.5 flex flex-col gap-1.5 sm:gap-2">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 rounded-md sm:rounded-lg nm-inset-sm" />
+                    <div className="w-3/4 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
+                    <div className="w-1/2 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <ArrowDown className="w-6 h-6 text-muted-foreground" />
-      </div>
+      <a
+        href="#about"
+        className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 nm-flat-sm hover:nm-flat p-2.5 rounded-full text-slate-500 dark:text-slate-400 animate-bounce transition-all"
+        aria-label="Scroll to about section"
+      >
+        <ArrowDown className="w-4 h-4" />
+      </a>
     </section>
   );
 };

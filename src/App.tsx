@@ -21,7 +21,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="fiction-dev-theme">
       <LazyMotion features={domAnimation}>
-        <div className="min-h-screen bg-[#F9FAFB] dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300 overflow-x-hidden font-inter selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-blue-900 dark:selection:text-blue-100 relative">
+        <div className="min-h-screen bg-[#eaf0f6] dark:bg-[#131722] text-[#0f172a] dark:text-[#f8fafc] transition-colors duration-300 overflow-x-hidden font-sans selection:bg-blue-100 dark:selection:bg-blue-900/60 selection:text-blue-900 dark:selection:text-blue-100 relative">
           <ParticleBackground />
           <Router basename={import.meta.env.BASE_URL}>
               <ScrollToTop />

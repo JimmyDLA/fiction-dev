@@ -11,8 +11,9 @@ const Home = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.state && (location.state as any).scrollTo) {
-      const id = (location.state as any).scrollTo;
+    const state = location.state as { scrollTo?: string } | null;
+    if (state?.scrollTo) {
+      const id = state.scrollTo;
       const element = document.getElementById(id);
       if (element) {
         // Little delay to ensure rendering
