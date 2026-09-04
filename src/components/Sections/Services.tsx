@@ -1,4 +1,4 @@
-import { m } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 import {
   Monitor,
   Smartphone,
@@ -11,7 +11,7 @@ import {
   ChevronRight,
   RotateCcw,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface Service {
@@ -74,7 +74,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
         {/* Back Face (Neumorphic Blueprint Details Panel) */}
         <div
           onClick={() => setIsFlipped(false)}
-          className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 p-8 rounded-[28px] bg-gradient-to-br from-[#deebf7] via-[#e5eef8] to-[#d8e6f5] dark:from-[#172033] dark:via-[#131b2c] dark:to-[#0f1523] border border-blue-300/30 dark:border-blue-500/20 shadow-xl flex flex-col justify-between relative overflow-hidden group"
+          className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 p-8 rounded-[28px] bg-gradient-to-br from-[#deebf7] via-[#e5eef8] to-[#d8e6f5] dark:from-[#313742] dark:via-[#2b2f36] dark:to-[#202329] border border-blue-300/30 dark:border-blue-500/20 shadow-xl flex flex-col justify-between relative overflow-hidden group"
         >
           <div className="w-full">
             {/* Header with flip back indicator */}
@@ -170,9 +170,17 @@ const Services = () => {
     },
   ];
 
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['end end', 'end start'],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+
   return (
-    <section id="services" className="py-24 md:py-36 relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={containerRef} id="services" className="py-24 md:py-36 relative z-10">
+      <m.div style={{ opacity, willChange: 'opacity' }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6">
           <div>
             <div className="inline-flex items-center gap-2 nm-pill-inset px-4 py-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 mb-4">
@@ -194,7 +202,7 @@ const Services = () => {
             <ServiceCard key={service.title} service={service} index={index} />
           ))}
         </div>
-      </div>
+      </m.div>
     </section>
   );
 };

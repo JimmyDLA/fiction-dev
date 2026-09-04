@@ -1,9 +1,17 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Award, Zap, Clock, TrendingUp } from 'lucide-react';
+import { useRef } from 'react';
 
 const About = () => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['end end', 'end start'],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
 
   const stats = [
     {
@@ -33,8 +41,8 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-24 md:py-36 relative overflow-hidden z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={containerRef} id="about" className="py-24 md:py-36 relative overflow-hidden z-10">
+      <motion.div style={{ opacity, willChange: 'opacity' }} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +107,7 @@ const About = () => {
             ))}
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };

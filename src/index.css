@@ -33,13 +33,13 @@
 html.dark {
   color-scheme: dark;
 
-  /* Neumorphic Dark Palette */
-  --nm-bg: #131722;
-  --nm-surface: #131722;
-  --nm-shadow-dark: #080a0f;
-  --nm-shadow-light: #1d2334;
-  --nm-shadow-dark-deep: #05060a;
-  --nm-shadow-subtle: #171c2a;
+  /* Neumorphic Enhanced Charcoal Palette (Brighter base + luminous specular pop) */
+  --nm-bg: #2b2f36;
+  --nm-surface: #2b2f36;
+  --nm-shadow-dark: #181b20;
+  --nm-shadow-light: #444b57;
+  --nm-shadow-dark-deep: #101216;
+  --nm-shadow-subtle: #21242a;
 
   --nm-text-main: #f8fafc;
   --nm-text-muted: #cbd5e1;

@@ -12,8 +12,8 @@ const Hero = () => {
     offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   // Subtle Mouse parallax for the graphic
   const mouseX = useMotionValue(0);
@@ -45,7 +45,7 @@ const Hero = () => {
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
-          style={{ y, opacity }}
+          style={{ y, opacity, willChange: 'transform, opacity' }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -101,47 +101,166 @@ const Hero = () => {
               className="perspective-1000 relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px]"
             >
               {/* Outer Recessed Base Plate */}
-              <div className="nm-inset-deep rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] p-4 sm:p-6 w-full aspect-[4/3] sm:aspect-square flex flex-col justify-between select-none transition-transform duration-300">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+                className="nm-inset-deep rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] p-4 sm:p-6 w-full aspect-[4/3] sm:aspect-square flex flex-col justify-between select-none transition-transform duration-300"
+              >
                 {/* Skeleton Top Navbar */}
                 <div className="flex items-center justify-between w-full pb-1">
                   <div className="flex items-center gap-1.5 sm:gap-2">
-                    <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 rounded-full bg-blue-600 dark:bg-blue-500 nm-flat-sm" />
-                    <div className="w-10 sm:w-14 lg:w-16 h-2 sm:h-2.5 lg:h-3 rounded-full nm-inset-sm" />
+                    {/* 1. Brand Logo Dot */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.3, ease: 'easeOut' }}
+                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 rounded-full bg-blue-600 dark:bg-blue-500 nm-flat-sm"
+                    />
+                    {/* 2. Brand Title Bar */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.6, ease: 'easeOut' }}
+                      className="w-10 sm:w-14 lg:w-16 h-2 sm:h-2.5 lg:h-3 rounded-full nm-inset-sm"
+                    />
                   </div>
                   <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
-                    <div className="w-6 sm:w-8 lg:w-10 h-1.5 sm:h-2 lg:h-2.5 rounded-full nm-inset-sm" />
-                    <div className="w-5 sm:w-6 lg:w-8 h-1.5 sm:h-2 lg:h-2.5 rounded-full nm-inset-sm" />
-                    <div className="w-8 sm:w-10 lg:w-12 h-3.5 sm:h-4 lg:h-5 rounded-full nm-flat-sm bg-blue-50/40 dark:bg-blue-950/40" />
+                    {/* 3. Nav Link 1 */}
+                    <motion.div
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: 0.9, ease: 'easeOut' }}
+                      className="w-6 sm:w-8 lg:w-10 h-1.5 sm:h-2 lg:h-2.5 rounded-full nm-inset-sm"
+                    />
+                    {/* 4. Nav Link 2 */}
+                    <motion.div
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: 1.2, ease: 'easeOut' }}
+                      className="w-5 sm:w-6 lg:w-8 h-1.5 sm:h-2 lg:h-2.5 rounded-full nm-inset-sm"
+                    />
+                    {/* 5. Nav Action Pill */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 1.5, ease: 'easeOut' }}
+                      className="w-8 sm:w-10 lg:w-12 h-3.5 sm:h-4 lg:h-5 rounded-full nm-flat-sm bg-blue-50/40 dark:bg-blue-950/40"
+                    />
                   </div>
                 </div>
 
                 {/* Skeleton Hero / Main Feature Card */}
-                <div className="nm-flat rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-5 flex flex-col gap-2 sm:gap-2.5 lg:gap-3">
-                  <div className="w-3/5 h-2.5 sm:h-3.5 lg:h-4 rounded-md nm-inset-sm bg-blue-500/15 dark:bg-blue-400/20" />
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 1.8, ease: 'easeOut' }}
+                  className="nm-flat rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-5 flex flex-col gap-2 sm:gap-2.5 lg:gap-3"
+                >
+                  {/* 6. Hero Headline Bar */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.35, delay: 2.1, ease: 'easeOut' }}
+                    className="w-3/5 h-2.5 sm:h-3.5 lg:h-4 rounded-md nm-inset-sm bg-blue-500/15 dark:bg-blue-400/20"
+                  />
                   <div className="space-y-1 sm:space-y-1.5">
-                    <div className="w-full h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
-                    <div className="w-4/5 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
+                    {/* 7. Paragraph Line 1 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, delay: 2.4, ease: 'easeOut' }}
+                      className="w-full h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm"
+                    />
+                    {/* 8. Paragraph Line 2 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, delay: 2.7, ease: 'easeOut' }}
+                      className="w-4/5 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm"
+                    />
                   </div>
                   <div className="flex items-center justify-between pt-0.5">
-                    <div className="w-14 sm:w-16 lg:w-20 h-5 sm:h-6 lg:h-7 rounded-lg bg-gradient-to-r from-blue-600 to-sky-500 shadow-sm shadow-blue-500/30" />
-                    <div className="w-6 sm:w-8 lg:w-10 h-2 sm:h-2.5 lg:h-3 rounded-md nm-inset-sm" />
+                    {/* 9. Action Button */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 3.0, ease: 'easeOut' }}
+                      className="w-14 sm:w-16 lg:w-20 h-5 sm:h-6 lg:h-7 rounded-lg bg-gradient-to-r from-blue-600 to-sky-500 shadow-sm shadow-blue-500/30"
+                    />
+                    {/* 10. Secondary Tag */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, delay: 3.3, ease: 'easeOut' }}
+                      className="w-6 sm:w-8 lg:w-10 h-2 sm:h-2.5 lg:h-3 rounded-md nm-inset-sm"
+                    />
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Skeleton Bottom Grid (2 Sub-Cards) */}
                 <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
-                  <div className="nm-flat rounded-lg sm:rounded-xl p-2.5 sm:p-3 lg:p-3.5 flex flex-col gap-1.5 sm:gap-2">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 rounded-md sm:rounded-lg nm-inset-sm" />
-                    <div className="w-3/4 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
-                    <div className="w-1/2 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
-                  </div>
-                  <div className="nm-flat rounded-lg sm:rounded-xl p-2.5 sm:p-3 lg:p-3.5 flex flex-col gap-1.5 sm:gap-2">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 rounded-md sm:rounded-lg nm-inset-sm" />
-                    <div className="w-3/4 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
-                    <div className="w-1/2 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm" />
-                  </div>
+                  {/* Bottom Sub-Card 1 (Left) */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: 3.6, ease: 'easeOut' }}
+                    className="nm-flat rounded-lg sm:rounded-xl p-2.5 sm:p-3 lg:p-3.5 flex flex-col gap-1.5 sm:gap-2"
+                  >
+                    {/* 11. Left Icon Well */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.6 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.35, delay: 3.8, ease: 'easeOut' }}
+                      className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 rounded-md sm:rounded-lg nm-inset-sm"
+                    />
+                    {/* 12. Left Bar 1 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -6 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, delay: 4.0, ease: 'easeOut' }}
+                      className="w-3/4 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm"
+                    />
+                    {/* 13. Left Bar 2 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -6 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, delay: 4.2, ease: 'easeOut' }}
+                      className="w-1/2 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm"
+                    />
+                  </motion.div>
+
+                  {/* Bottom Sub-Card 2 (Right) */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: 4.4, ease: 'easeOut' }}
+                    className="nm-flat rounded-lg sm:rounded-xl p-2.5 sm:p-3 lg:p-3.5 flex flex-col gap-1.5 sm:gap-2"
+                  >
+                    {/* 14. Right Icon Well */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.6 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.35, delay: 4.6, ease: 'easeOut' }}
+                      className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 rounded-md sm:rounded-lg nm-inset-sm"
+                    />
+                    {/* 15. Right Bar 1 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -6 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, delay: 4.8, ease: 'easeOut' }}
+                      className="w-3/4 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm"
+                    />
+                    {/* 16. Right Bar 2 */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -6 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, delay: 5.0, ease: 'easeOut' }}
+                      className="w-1/2 h-1.5 sm:h-2 lg:h-2.5 rounded-md nm-inset-sm"
+                    />
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </motion.div>

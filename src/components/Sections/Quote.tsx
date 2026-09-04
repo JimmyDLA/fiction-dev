@@ -1,14 +1,22 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Calculator } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 
 const Quote = () => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['end end', 'end start'],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
 
   return (
-    <section className="py-20 md:py-28 relative z-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={containerRef} className="py-20 md:py-28 relative z-10">
+      <motion.div style={{ opacity, willChange: 'opacity' }} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -36,7 +44,7 @@ const Quote = () => {
             </button>
           </Link>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };

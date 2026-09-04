@@ -82,17 +82,14 @@ const useProcessSteps = (): ProcessStepItem[] => {
 };
 
 const ProcessStep = ({ step, index }: { step: ProcessStepItem; index: number }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.92, 1, 1, 0.92]);
-
   return (
-    <motion.div ref={ref} style={{ opacity, scale }} className="mb-16 md:mb-24 last:mb-0 relative">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className="mb-16 md:mb-24 last:mb-0 relative"
+    >
       <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
         {/* Sticky Tactile Step Number & Icon Column */}
         <div className="hidden md:flex flex-col items-center sticky top-36">
@@ -163,10 +160,17 @@ const ProcessStep = ({ step, index }: { step: ProcessStepItem; index: number }) 
 const Process = () => {
   const steps = useProcessSteps();
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['end end', 'end start'],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
 
   return (
-    <section id="development" className="py-24 md:py-36 relative z-10">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={containerRef} id="development" className="py-24 md:py-36 relative z-10">
+      <motion.div style={{ opacity, willChange: 'opacity' }} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -191,7 +195,7 @@ const Process = () => {
             <ProcessStep key={step.id} step={step} index={index} />
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
